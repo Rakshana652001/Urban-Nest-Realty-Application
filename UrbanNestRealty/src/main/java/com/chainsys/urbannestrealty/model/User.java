@@ -2,7 +2,7 @@ package com.chainsys.urbannestrealty.model;
 
 public class User 
 {
-	String id;
+	String generatedUserID;
     String name;
     long   phoneNumber;
     String emailID;
@@ -12,12 +12,16 @@ public class User
     String state;    		    
     String designation;
     
-    
-	public String getId() {
-		return id;
+    public User() 
+    {
+		
 	}
-	public void setId(String id) {
-		this.id = id;
+	public String getGeneratedUserID() {
+		return generatedUserID;
+	}
+	
+	public void setGeneratedUserID(String generatedUserID) {
+		this.generatedUserID = generatedUserID;
 	}
 	public String getName() {
 		return name;
@@ -69,8 +73,9 @@ public class User
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", emailID=" + emailID
-				+ ", password=" + password + ", address=" + address + ", district=" + district + ", state=" + state
-				+ ", designation=" + designation + "]";
+		return "User [generatedUserID=" + generatedUserID + ", name=" + name + ", phoneNumber=" + phoneNumber
+				+ ", emailID=" + emailID + ", password=" + password + ", address=" + address + ", district=" + district
+				+ ", state=" + state + ", designation=" + designation + "]";
 	}
+    
 }
