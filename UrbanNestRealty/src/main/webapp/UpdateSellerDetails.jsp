@@ -114,7 +114,6 @@ String name = request.getParameter("name");
 	<label for="phoneNumber">Phone Number: <input type="tel" id="phoneNumber" maxlength="10" name="phoneNumber" placeholder="7339263883" pattern="[789][0-9]{9}" required/></label>
     <label for="password">Password: <input type="password" id="password" name="password" placeholder="Rakshana@12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/></label>
     <label for="address">Address: <textarea id="address" name="address" rows="4" cols="50" required></textarea></label>
-    <input type="hidden" name="name" value="<%=request.getParameter("editName") %>">
     <button>Update</button>
 </form>
 </body>

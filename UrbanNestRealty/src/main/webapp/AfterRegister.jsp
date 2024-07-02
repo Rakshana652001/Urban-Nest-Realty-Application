@@ -8,6 +8,6 @@
 </head>
 <body>
 <h4>Successfully Registered</h4>
-<a href="home.jsp"><button>Back to Home Page</button></a>
+<a href="http://localhost:9000/#home"><button>Back to Home Page</button></a>
 </body>
 </html>

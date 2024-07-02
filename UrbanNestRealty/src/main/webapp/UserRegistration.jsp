@@ -205,7 +205,7 @@ function validateForm()
     setTimeout(function(){ form.submit(); }, 5000);
 }
 </script>
-<a href="home.jsp"><button type="submit" >Back to home</button></a>
+<a href="http://localhost:9000/#home"><button type="submit" >Back to home</button></a>
 </body>
 </html>
     

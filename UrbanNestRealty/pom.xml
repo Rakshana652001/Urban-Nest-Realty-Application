@@ -70,6 +70,12 @@
       <groupId>org.springframework.session</groupId>
       <artifactId>spring-session-core</artifactId>
     </dependency>
+    <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version> <!-- or a newer version that matches your
+            environment -->
+        </dependency>
     </dependencies>
     
 

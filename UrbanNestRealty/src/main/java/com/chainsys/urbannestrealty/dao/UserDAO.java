@@ -2,6 +2,7 @@ package com.chainsys.urbannestrealty.dao;
 
 import java.util.List;
 
+import com.chainsys.urbannestrealty.model.PropertyRegistration;
 import com.chainsys.urbannestrealty.model.User;
 
 public interface UserDAO 
@@ -11,7 +12,7 @@ public interface UserDAO
 
 	String getAdminpassword(String generatedUserID);
 	
-	String getGeneratedId(String generatedUserID);
+	//String getGeneratedId(String generatedUserID);
 
 	String getsellerPassword(String generatedUserID);
 
@@ -30,6 +31,14 @@ public interface UserDAO
 	List<User> retriveSellerProfile(String id);
 
 	void updateSellerdetails(User user);
+
+	void propertyRegistration(PropertyRegistration propertyRegistration);
+
+	void delete(User user);
+
+	String getsellerId(String generatedUserID);
+
+	String getcustomerId(String generatedUserID);
 
 
 	

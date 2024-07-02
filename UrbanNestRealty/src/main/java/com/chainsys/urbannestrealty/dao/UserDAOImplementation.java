@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.chainsys.urbannestrealty.mapper.UserMapper;
+import com.chainsys.urbannestrealty.model.PropertyRegistration;
 import com.chainsys.urbannestrealty.model.User;
 
 @Repository
@@ -33,18 +34,34 @@ public class UserDAOImplementation implements UserDAO
 		return password;
 	}
 
+//	@Override
+//	public String getGeneratedId(String generatedUserID) 
+//	{
+//		String sellerId = "select id from user where id=? and (designation = 'Seller' or designation = 'Customer') and deleted_User=0";
+//		String seller = jdbcTemplate.queryForObject(sellerId, String.class, generatedUserID);
+//		return seller;
+//	}
+	
 	@Override
-	public String getGeneratedId(String generatedUserID) 
+	public String getsellerId(String generatedUserID)
 	{
-		String sellerId = "select id from user where id=? and (designation = 'Seller' or designation = 'Customer') and deleted_User=0";
+		String sellerId = "select id from user where id=? and designation = 'Seller' and deleted_User=0";
 		String seller = jdbcTemplate.queryForObject(sellerId, String.class, generatedUserID);
 		return seller;
 	}
-
+	
+	@Override
+	public String getcustomerId(String generatedUserID)
+	{
+		String sellerId = "select id from user where id=? and designation = 'Customer' and deleted_User=0";
+		String seller = jdbcTemplate.queryForObject(sellerId, String.class, generatedUserID);
+		return seller;
+	}
+	
 	@Override
 	public String getsellerPassword(String generatedUserID) 
 	{
-		String password = "select password from user where id=? and (designation = 'Seller') and deleted_User=0";
+		String password = "select password from user where id=? and designation = 'Seller' and deleted_User=0";
 		String sellerPassword = jdbcTemplate.queryForObject(password, String.class, generatedUserID);
 		return sellerPassword;
 	}
@@ -52,9 +69,9 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public String getCustomerPassword(String generatedUserID) 
 	{
-		String password = "select password from user where id=? and (designation = 'Customer') and deleted_User=0";
-		String sellerPassword = jdbcTemplate.queryForObject(password, String.class, generatedUserID);
-		return sellerPassword;
+		String password = "select password from user where id=? and designation = 'Customer' and deleted_User=0";
+		String customerPassword = jdbcTemplate.queryForObject(password, String.class, generatedUserID);
+		return customerPassword;
 	}
 
 	@Override
@@ -74,6 +91,14 @@ public class UserDAOImplementation implements UserDAO
 		jdbcTemplate.update(update, params);
 	}
 
+	@Override
+	public void updateSellerdetails(User user) {
+		String update = "update user set phone_number=?, password=?, address=? where name=?";
+		Object[] params = {user.getPhoneNumber(), user.getPassword(), user.getAddress(), user.getName()};
+		jdbcTemplate.update(update, params);
+		
+	}	
+	
 	@Override
 	public List<User> sellerCustomerDetails() 
 	{
@@ -107,10 +132,20 @@ public class UserDAOImplementation implements UserDAO
 	}
 
 	@Override
-	public void updateSellerdetails(User user) {
-		String update = "update user set phone_number=?, password=?, address=? where name=?";
-		Object[] params = {user.getPhoneNumber(), user.getPassword(), user.getAddress(), user.getName()};
-		jdbcTemplate.update(update, params);
+	public void propertyRegistration(PropertyRegistration propertyRegistration) 
+	{
+		String insert = "insert into property_registration (seller_id,property_name, property_id, approval, property_images, property_document, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status, payment_status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = {propertyRegistration.getSellerId(), propertyRegistration.getPropertyName(), propertyRegistration.getPropertyId(), propertyRegistration.getApproval(), propertyRegistration.getPropertyImages(), propertyRegistration.getPropertyDocument(),propertyRegistration.getPropertyPrice(),
+				propertyRegistration.getPropertyAddress(), propertyRegistration.getPropertyDistrict(), propertyRegistration.getPropertyState(), propertyRegistration.getRegisteredDate(), propertyRegistration.getPurchasedDate(),propertyRegistration.getCustomerId(), propertyRegistration.getRegisterStatus(), propertyRegistration.getPaymentStatus()};
+		jdbcTemplate.update(insert, params);
 		
+	}
+
+	@Override
+	public void delete(User user)
+	{
+		String delete = "update user set deleted_User=1 where name=?";
+		Object[] name = {user.getName()};
+		jdbcTemplate.update(delete, name);		
 	}	
 }

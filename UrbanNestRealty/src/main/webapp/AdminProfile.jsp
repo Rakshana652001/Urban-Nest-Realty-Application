@@ -63,8 +63,13 @@
          <p><strong>Email ID: </strong><%= object.getEmailID()%></p>
          <p><strong>Address: </strong><%= object.getAddress() %></p>
          <p><strong>District: </strong><%= object.getDistrict() %></p>
-         <p><strong>State: </strong><%= object.getState() %></p>    
-         <input type="hidden" value="<%=object.getName() %>" name="name"><a href="UpdateAdminDetails.jsp?editName=<%=object.getName() %>"><button>Update</button></a>
+         <p><strong>State: </strong><%= object.getState() %></p>   
+          
+         <form action="UpdateAdminDetails.jsp">
+         <input type="hidden" value="<%=object.getName() %>" name="name">
+         <button>Update</button>
+         </form>
+         
    		 <form action="AdminWelcomePage.jsp"><button>Back to Home</button></form>        	
    	</div>
 	<% 

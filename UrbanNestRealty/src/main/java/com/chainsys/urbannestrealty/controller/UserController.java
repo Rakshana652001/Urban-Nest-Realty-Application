@@ -24,7 +24,7 @@ public class UserController
 	@RequestMapping("/")
 	public String home()
 	{        
-		return "home.jsp";
+		return "Home.jsp";
 	}
 	
 	@PostMapping("/UserRegistration")
@@ -64,21 +64,36 @@ public class UserController
 					return "AdminLogin.jsp";
 				}
 			}
-			else if(generatedUserID.equals(userDAO.getGeneratedId(generatedUserID)))
+				
+			else if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID)))
+			{
+				if(password.equals(userDAO.getCustomerPassword(generatedUserID)))
+				{
+					httpSession.setAttribute("customerId", generatedUserID);
+					return "CustomerWelcomePage.jsp";
+				}
+				else
+				{
+					return "AdminLogin.jsp";
+				}				
+			}
+			else if(generatedUserID.equals(userDAO.getsellerId(generatedUserID)))
 			{
 				if(password.equals(userDAO.getsellerPassword(generatedUserID)))
 				{
 					httpSession.setAttribute("sellerId", generatedUserID);
 					return "SellerWelcomePage.jsp";
 				}
-				else if(password.equals(userDAO.getCustomerPassword(generatedUserID)))
+				else
 				{
-					httpSession.setAttribute("customerId", generatedUserID);
-					return "CustomerWelcomePage.jsp";
+					return "AdminLogin.jsp";
 				}
+			}
+			else
+			{
+				return "AdminLogin.jsp";
 			}			
 		}
-		
 		catch (Exception e) 
 		{
 			System.out.println(e);
@@ -103,6 +118,7 @@ public class UserController
 		user.setPassword(password);
 		user.setAddress(address);
 		user.setName(name);
+		
 		userDAO.updateAdmindetails(user);
 		
 		List<User> list = userDAO.retriveAdminDetails();
@@ -136,7 +152,20 @@ public class UserController
 	{
 		List<User> list = userDAO.sellerCustomerDetails();
 		model.addAttribute("list",list);
-		return "UsersTable.jsp";
+		return "SellerList.jsp";
+	}
+	
+	@PostMapping("/deleteseller")
+	public String delete(@RequestParam ("deleteName") String name, Model model)
+	{
+		User user = new User();
+		user.setName(name);
+		
+		userDAO.delete(user);
+		
+		List<User> list = userDAO.sellerCustomerDetails();
+		model.addAttribute("list",list);
+		return "SellerList.jsp";
 	}
 	
 	@GetMapping("/CustomerDetails")
@@ -144,7 +173,21 @@ public class UserController
 	{
 		List<User> list = userDAO.customerDetails();
 		model.addAttribute("list",list);
-		return "UsersTable.jsp";
+		return "CustomerList.jsp";
+	}
+	
+	
+	@PostMapping("/deletecustomer")
+	public String deletecustomer(@RequestParam ("deleteName") String name, Model model)
+	{
+		User user = new User();
+		user.setName(name);
+		
+		userDAO.delete(user);
+		
+		List<User> list = userDAO.customerDetails();
+		model.addAttribute("list",list);
+		return "CustomerList.jsp";
 	}
 	
 	@GetMapping("/Search")
