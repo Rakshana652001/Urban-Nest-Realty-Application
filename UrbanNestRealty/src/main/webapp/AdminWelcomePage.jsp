@@ -95,8 +95,8 @@
     <div class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Seller Properties</a>
         <div class="dropdown-content">
-            <a href="ApprovedServlet">Authorized</a>
-            <a href="AllPropertyServlet">Pending</a>
+        	<a href="PendingProperty">Pending</a>
+            <a href="Authorized">Authorized</a>
         </div>
     </div>
     <a href="ApproveToBuyServlet">Payment Approval</a>

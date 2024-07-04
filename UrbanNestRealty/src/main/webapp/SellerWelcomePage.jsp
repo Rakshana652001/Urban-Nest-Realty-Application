@@ -85,7 +85,7 @@
     
         <a href="SellerProfile">Profile</a>
         <a href="PropertyRegistration.jsp">Property Registration</a>
-        <a href="PropertyTableServlet">Registered Properties</a>
+        <a href="RegisteredProperties">Registered Properties</a>
         <a href="PaidServlet">Completed Deals</a>
         <a href="http://localhost:9000/#home">Logout</a>
     </div>

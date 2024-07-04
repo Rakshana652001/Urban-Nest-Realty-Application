@@ -82,12 +82,12 @@
     
 	<div class="navbar">
 	<h2 class="text-center">Urban Nest Realty</h2>
-		<a href="CustomerProfileServlet">Profile</a>
-		<a href="WelcomePage.jsp">Home</a>
+	    <a href="http://localhost:9000/#home">Home</a>
+		<a href="CustomerProfile">Profile</a>
 		<a href="RegisterdPropertiesServlet">Properties Under Review</a>
 		<a href="RegisterBuyPropertiesServlet">Ready-to-Purchase</a>
 		<a href="BuyedPropertiesServlet">Purchased Properties</a>
-		<a href="WelcomePage.jsp">Log Out</a>
+		<a href="http://localhost:9000/#home">Log Out</a>
 	</div>
     <div class="content">
     	<h2>Welcome to Customer Dashboard</h2>

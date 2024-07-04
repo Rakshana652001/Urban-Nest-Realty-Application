@@ -2,7 +2,7 @@ package com.chainsys.urbannestrealty.model;
 
 import java.util.Arrays;
 
-public class SalesRecord 
+public class Sales 
 {
 	String customerId, sellerId ;
 	long totalAmount;

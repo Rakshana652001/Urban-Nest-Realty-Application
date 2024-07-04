@@ -1,9 +1,10 @@
 package com.chainsys.urbannestrealty.model;
 
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.Arrays;
 
-public class PropertyRegistration
+
+public class Property
 {
 	String sellerId;
     String propertyName;
@@ -12,8 +13,8 @@ public class PropertyRegistration
     String propertyAddress;                                      
     String propertyDistrict;
     String propertyState;
-    MultipartFile propertyImages;
-    MultipartFile propertyDocument;
+    byte[] propertyImages;
+    byte[] propertyDocument;
     String approval;
     String registerStatus;
     String paymentStatus;
@@ -62,16 +63,16 @@ public class PropertyRegistration
 	public void setPropertyState(String propertyState) {
 		this.propertyState = propertyState;
 	}
-	public MultipartFile getPropertyImages() {
+	public byte[] getPropertyImages() {
 		return propertyImages;
 	}
-	public void setPropertyImages(MultipartFile propertyImages) {
+	public void setPropertyImages(byte[] propertyImages) {
 		this.propertyImages = propertyImages;
 	}
-	public MultipartFile getPropertyDocument() {
+	public byte[] getPropertyDocument() {
 		return propertyDocument;
 	}
-	public void setPropertyDocument(MultipartFile propertyDocument) {
+	public void setPropertyDocument(byte[] propertyDocument) {
 		this.propertyDocument = propertyDocument;
 	}
 	public String getApproval() {
@@ -115,8 +116,10 @@ public class PropertyRegistration
 		return "PropertyRegistration [sellerId=" + sellerId + ", propertyName=" + propertyName + ", propertyId="
 				+ propertyId + ", propertyPrice=" + propertyPrice + ", propertyAddress=" + propertyAddress
 				+ ", propertyDistrict=" + propertyDistrict + ", propertyState=" + propertyState + ", propertyImages="
-				+ propertyImages + ", propertyDocument=" + propertyDocument + ", approval=" + approval
-				+ ", registerStatus=" + registerStatus + ", paymentStatus=" + paymentStatus + ", customerId="
-				+ customerId + ", registeredDate=" + registeredDate + ", purchasedDate=" + purchasedDate + "]";
-	}	
+				+ Arrays.toString(propertyImages) + ", propertyDocument=" + Arrays.toString(propertyDocument)
+				+ ", approval=" + approval + ", registerStatus=" + registerStatus + ", paymentStatus=" + paymentStatus
+				+ ", customerId=" + customerId + ", registeredDate=" + registeredDate + ", purchasedDate="
+				+ purchasedDate + "]";
+	}
+	
 }

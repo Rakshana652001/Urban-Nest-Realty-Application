@@ -76,8 +76,8 @@ button:hover, .btn-action:hover {
 <form action="AdminWelcomePage.jsp">
 <button>Back to Home</button>
 </form>
-<form action="Search" method="get">
-	<label>Search: <input type="text" name="id"  placeholder="Search By Name" ></label>
+<form action="SellerSearch" method="get">
+	<label>Search: <input type="text" name="id" placeholder="Search By Name"></label>
 </form>
 <table border="1">
 	<thead>

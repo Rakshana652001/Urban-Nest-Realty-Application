@@ -3,6 +3,7 @@ package com.chainsys.urbannestrealty.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.urbannestrealty.dao.UserDAO;
 import com.chainsys.urbannestrealty.model.User;
+import com.chainsys.urbannestrealty.validation.Validation;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +22,8 @@ public class UserController
 {
 	@Autowired 
 	UserDAO userDAO;
+	@Autowired
+	Validation validation;
 	
 	@RequestMapping("/")
 	public String home()
@@ -28,12 +32,12 @@ public class UserController
 	}
 	
 	@PostMapping("/UserRegistration")
-	public String saveUserDetails(@RequestParam("generatedUserID") String generatedUserID ,@RequestParam ("name") String name ,@RequestParam("phoneNumber") long phoneNumber ,@RequestParam ("designation") String designation, @RequestParam ("emailID") String emailID, @RequestParam ("password") String password, @RequestParam("district") String district, @RequestParam("state") String state, @RequestParam("address") String address)
+	public String saveUserDetails(@RequestParam("generatedUserID") String generatedUserID ,@RequestParam ("name") String name ,@RequestParam("phoneNumber") long phoneNumber ,@RequestParam ("designation") String designation, @RequestParam ("emailID") String emailID, @RequestParam ("password") String password, @RequestParam("district") String district, @RequestParam("state") String state, @RequestParam("address") String address, Model model)
 	{
 		User user = new User();
 		
 		user.setGeneratedUserID(generatedUserID);
-		user.setName(name);
+		user.setName(name);		
 		user.setPhoneNumber(phoneNumber);
 		user.setDesignation(designation);
 		user.setEmailID(emailID);
@@ -42,20 +46,28 @@ public class UserController
 		user.setState(state);
 		user.setAddress(address);
 		
-		userDAO.saveUserDetails(user);
+		if(Boolean.FALSE.equals(validation.nameValidation(name, model))||Boolean.FALSE.equals(validation.phoneNumberValidation(phoneNumber,model))||Boolean.FALSE.equals(validation.emailValidation(emailID, model))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
+		{
+			
+			return "UserRegistration.jsp";
+		}
+		else
+		{
+			userDAO.saveUserDetails(user);
+			return "SuccessPage.jsp";
+		}
 		
-		return "AfterRegister.jsp";
 	}
 	
 	@PostMapping("/Login")
-	public String login(@RequestParam("generatedUserID") String generatedUserID, @RequestParam("password") String password, HttpSession httpSession)
+	public String login(@RequestParam("generatedUserID") String generatedUserID, @RequestParam("password") String password, HttpSession httpSession, Model model)
 	{
 		try
 		{
 			if(generatedUserID.equals("UNR_Admin_1"))
 			{
-				if(password.equals(userDAO.getAdminpassword(generatedUserID)))
-				{					
+				if(password.equals(userDAO.getAdminpassword(generatedUserID)) || Boolean.FALSE.equals(validation.passwordValidation(password,model)))
+				{
 					httpSession.setAttribute("UNR_Admin_1", generatedUserID);
 					return "AdminWelcomePage.jsp";
 				}
@@ -64,22 +76,9 @@ public class UserController
 					return "AdminLogin.jsp";
 				}
 			}
-				
-			else if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID)))
-			{
-				if(password.equals(userDAO.getCustomerPassword(generatedUserID)))
-				{
-					httpSession.setAttribute("customerId", generatedUserID);
-					return "CustomerWelcomePage.jsp";
-				}
-				else
-				{
-					return "AdminLogin.jsp";
-				}				
-			}
 			else if(generatedUserID.equals(userDAO.getsellerId(generatedUserID)))
 			{
-				if(password.equals(userDAO.getsellerPassword(generatedUserID)))
+				if(password.equals(userDAO.getsellerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
 				{
 					httpSession.setAttribute("sellerId", generatedUserID);
 					return "SellerWelcomePage.jsp";
@@ -89,16 +88,26 @@ public class UserController
 					return "AdminLogin.jsp";
 				}
 			}
+			else if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID)))
+			{
+				if(password.equals(userDAO.getCustomerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
+				{
+					httpSession.setAttribute("customerId", generatedUserID);
+					return "CustomerWelcomePage.jsp";
+				}
+				else
+				{
+					return "AdminLogin.jsp";
+				}				
+			}
 			else
 			{
 				return "AdminLogin.jsp";
-			}			
+			}	
 		}
-		catch (Exception e) 
-		{
-			System.out.println(e);
-		}
-		return "AdminLogin.jsp";
+		catch (EmptyResultDataAccessException e) {
+	        return "AdminLogin.jsp";
+	    }
 	}
 	
 	@GetMapping("/AdminProfile")
@@ -107,6 +116,24 @@ public class UserController
 		List<User> list = userDAO.retriveAdminDetails();
 		model.addAttribute("list", list);
 		return "AdminProfile.jsp";
+	}
+	
+	@GetMapping("/SellerProfile")
+	public String sellerProfile(Model model, HttpSession httpSession)
+	{
+		String id = (String) httpSession.getAttribute("sellerId");
+		List<User> list = userDAO.retriveSellerProfile(id);
+		model.addAttribute("list", list);
+		return "SellerProfile.jsp";
+	}
+	
+	@GetMapping("/CustomerProfile")
+	public String customerProfile(Model model, HttpSession httpSession)
+	{
+		String id = (String) httpSession.getAttribute("customerId");
+		List<User> list = userDAO.retriveCustomerDetails(id);
+		model.addAttribute("list", list);
+		return "CustomerProfile.jsp";
 	}
 	
 	@PostMapping("/UpdateAdminDetails")
@@ -127,6 +154,23 @@ public class UserController
 		
 	}
 	
+	@PostMapping("/UpdateCustomer")
+	public String updateCustomer(@RequestParam("phoneNumber") long phoneNumber, @RequestParam("password") String password, @RequestParam("address") String address, @RequestParam("name") String name, Model model,HttpSession httpSession)
+	{
+		User user = new User();
+		
+		user.setPhoneNumber(phoneNumber);
+		user.setPassword(password);
+		user.setAddress(address);
+		user.setName(name);
+		
+		userDAO.updateCustomerdetails(user);
+		
+		String id = (String) httpSession.getAttribute("customerId");
+		List<User> list = userDAO.retriveCustomerDetails(id);
+		model.addAttribute("list", list);
+		return "CustomerProfile.jsp";		
+	}
 	
 	@PostMapping("/UpdateSeller")
 	public String updateSeller(@RequestParam("phoneNumber") long phoneNumber, @RequestParam("password") String password, @RequestParam("address") String address, @RequestParam("name") String name, Model model,HttpSession httpSession)
@@ -190,21 +234,20 @@ public class UserController
 		return "CustomerList.jsp";
 	}
 	
-	@GetMapping("/Search")
+	@GetMapping("/SellerSearch")
 	public String Search(@RequestParam("id") String id, Model model)
 	{
-		List<User> list = userDAO.search(id);
+		List<User> list = userDAO.sellerSearch(id);
 		model.addAttribute("list",list);
-		return "UsersTable.jsp";
+		return "SellerList.jsp";
 	}
 	
-	@GetMapping("/SellerProfile")
-	public String sellerProfile(Model model, HttpSession httpSession)
+	@GetMapping("/CustomerSearch")
+	public String customerSearch(@RequestParam("id") String id, Model model)
 	{
-		String id = (String) httpSession.getAttribute("sellerId");
-		List<User> list = userDAO.retriveSellerProfile(id);
-		model.addAttribute("list", list);
-		return "SellerProfile.jsp";
+		List<User> list = userDAO.customerSearch(id);
+		model.addAttribute("list",list);
+		return "CustomerList.jsp";
 	}
 	
 	

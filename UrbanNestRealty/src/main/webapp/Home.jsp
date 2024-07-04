@@ -189,7 +189,7 @@ section{
                 <img src="Images/House.jpg" class="card-img-top" alt="House">
                 <div class="card-body text-center">
                   <h5 class="card-title">Residential</h5>
-                  <a href="ResidentialServlet" class="btn btn-outline-dark">See More</a>
+                  <a href="Residential" class="btn btn-outline-dark">See More</a>
                 </div>
             </div>
         </div>
@@ -198,7 +198,7 @@ section{
                 <img src="Images/Land.jpg" class="card-img-top" alt="Land">
                 <div class="card-body text-center">
                   <h5 class="card-title">Land</h5>
-                  <a href="LandServlet" class="btn btn-outline-dark">See More</a>
+                  <a href="Land" class="btn btn-outline-dark">See More</a>
                 </div>
             </div>
         </div>
@@ -207,7 +207,7 @@ section{
                 <img src="Images/Flat.webp" class="card-img-top" alt="Industrial">
                 <div class="card-body text-center">
                   <h5 class="card-title">Industrial</h5>
-                  <a href="IndustrialServlet" class="btn btn-outline-dark">See More</a>
+                  <a href="Industrial" class="btn btn-outline-dark">See More</a>
                 </div>
             </div>
         </div>
@@ -216,7 +216,7 @@ section{
                 <img src="Images/Shop.webp" class="card-img-top" alt="Commercial">
                 <div class="card-body text-center">
                   <h5 class="card-title">Commercial</h5>
-                  <a href="CommercialServlet" class="btn btn-outline-dark">See More</a>
+                  <a href="Commercial" class="btn btn-outline-dark">See More</a>
                 </div>
             </div>
         </div>
