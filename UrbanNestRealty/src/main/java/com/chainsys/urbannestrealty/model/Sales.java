@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Sales 
 {
-	String customerId, sellerId ;
+	String customerId, sellerId, propertyId, propertyName;
 	long totalAmount;
 	String paymentMethod;
 	String approval;
@@ -15,7 +15,6 @@ public class Sales
 	long customerAccount;
 	long sellerAccount;
 	String purchasedDate;
-	
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -27,6 +26,18 @@ public class Sales
 	}
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
+	}
+	public String getPropertyId() {
+		return propertyId;
+	}
+	public void setPropertyId(String propertyId) {
+		this.propertyId = propertyId;
+	}
+	public String getPropertyName() {
+		return propertyName;
+	}
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
 	}
 	public long getTotalAmount() {
 		return totalAmount;
@@ -90,10 +101,13 @@ public class Sales
 	}
 	@Override
 	public String toString() {
-		return "SaleRecords [customerId=" + customerId + ", sellerId=" + sellerId + ", totalAmount=" + totalAmount
-				+ ", paymentMethod=" + paymentMethod + ", approval=" + approval + ", propertyAddress=" + propertyAddress
-				+ ", governmentId=" + Arrays.toString(governmentId) + ", payableAmount=" + payableAmount
-				+ ", paidStatus=" + paidStatus + ", customerAccount=" + customerAccount + ", sellerAccount="
-				+ sellerAccount + ", purchasedDate=" + purchasedDate + "]";
+		return "Sales [customerId=" + customerId + ", sellerId=" + sellerId + ", propertyId=" + propertyId
+				+ ", propertyName=" + propertyName + ", totalAmount=" + totalAmount + ", paymentMethod=" + paymentMethod
+				+ ", approval=" + approval + ", propertyAddress=" + propertyAddress + ", governmentId="
+				+ Arrays.toString(governmentId) + ", payableAmount=" + payableAmount + ", paidStatus=" + paidStatus
+				+ ", customerAccount=" + customerAccount + ", sellerAccount=" + sellerAccount + ", purchasedDate="
+				+ purchasedDate + "]";
 	}
+	
+	
 }

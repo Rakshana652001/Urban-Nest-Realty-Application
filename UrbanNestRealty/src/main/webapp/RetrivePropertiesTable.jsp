@@ -1,12 +1,13 @@
+<%@page import="com.chainsys.urbannestrealty.model.Sales"%>
 <%@page import="java.util.Base64"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.chainsys.urbannestrealty.model.Property" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
-<html lang="xml:lang"> 
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Registered Properties</title>
+<title>Authorized Properties</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -79,18 +80,16 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 </style>
 </head>
 <body>
-<h3>Registered Properties</h3>
-<a href="http://localhost:9000/SellerWelcomePage.jsp?"><button>Back to home</button></a>
+<h3>Authorized Properties</h3>
+<a href="AdminWelcomePage.jsp"><button>Back to home</button></a>
 
 <table border="1">
     <thead>
         <tr>
                 <th>Seller ID</th>
                 <th>Property Name</th>
-                <th>Property ID</th>
                 <th>Approval Status</th>
                 <th>Property Images</th>
-                <th>Property Documents Photo Copy</th>
                 <th>Property Price</th>
                 <th>Property Address</th>
                 <th>Property District</th>
@@ -105,40 +104,31 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Property> list = (ArrayList<Property>) request.getAttribute("list");
-       	for (Property object : list)
-             {
-                 byte[] images = object.getPropertyImages();
-                 String getImage;
-                 getImage = Base64.getEncoder().encodeToString(images);
-                 
-                 byte[] document = object.getPropertyDocument();
-                 String getDocument = Base64.getEncoder().encodeToString(document);
-             
-         %>
+        for (Property object : list) {
+            byte[] images = object.getPropertyImages();
+            String getImage = Base64.getEncoder().encodeToString(images);
+            
+           %>
              <tr>
                  <td><%= object.getSellerId() %></td>
                  <td><%= object.getPropertyName() %></td>
-                 <td><%= object.getPropertyId() %></td>
-                 <td><%=object.getApproval() %>
+                 <td><%=object.getApproval() %></td>
                  <td> 
-                	<img alt="ShowRoom" src="data:image/jpeg;base64,<%= getImage %> ">
+                	<img alt="Residential" src="data:image/jpeg;base64,<%= getImage %> ">      
                  </td>
-                 <td>
-                 	<img alt="document" src="data:image/jpeg;base64, <%=getDocument %>">
-                 </td>
-                <td><%= object.getPropertyPrice() %></td>
-                    <td><%= object.getPropertyAddress() %></td>
-                    <td><%= object.getPropertyDistrict() %></td>
-                    <td><%=object.getPropertyState() %></td>
-                    <td><%=object.getRegisteredDate() %></td>
-                    <td><%=object.getPurchasedDate() %></td>
-                    <td><%=object.getCustomerId() %></td>
-                    <td><%=object.getRegisterStatus() %></td>
-                    <td><%=object.getPaymentStatus() %></td> 
+                
+                 <td><%= object.getPropertyPrice() %></td>
+                 <td><%= object.getPropertyAddress() %></td>
+                 <td><%= object.getPropertyDistrict() %></td>
+                 <td><%=object.getPropertyState() %></td>
+                 <td><%=object.getRegisteredDate() %></td>
+                 <td><%=object.getPurchasedDate() %></td>
+                 <td><%=object.getCustomerId() %></td>
+                 <td><%=object.getRegisterStatus() %></td>
+                 <td><%=object.getPaymentStatus() %></td>
              </tr>
-         <%
-             }  
-            %>
+             
+         <% } %>
     </tbody>
 </table>
 </body>

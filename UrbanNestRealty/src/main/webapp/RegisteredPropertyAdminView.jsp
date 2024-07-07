@@ -18,7 +18,7 @@ body {
     align-items: center;
     flex-direction: column;
     color: #333;
-    width: 120%;
+    width: 130%;
 }
 
 h3 {
@@ -123,7 +123,7 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
                             <select name="approvalStatus">
                                 <option value="Select">Select</option>
                                 <option value="Approved">Approved</option>
-                                <option value="Not Approved">Not Approved</option>
+                                <option value="Rejected">Rejected</option>
                             </select>
                             <input type="submit" value="Submit">
                         </form>

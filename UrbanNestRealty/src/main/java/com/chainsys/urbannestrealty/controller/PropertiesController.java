@@ -26,7 +26,6 @@ public class PropertiesController
 	UserDAO userDAO;
 	
 	
-	@SuppressWarnings("unused")
 	@PostMapping("/PropertyRegistration")
 	public String saveUserDetails(@RequestParam("sellerId") String sellerId ,@RequestParam ("propertyName") String propertyName ,@RequestParam("propertyId") String propertyId ,@RequestParam ("registeredDate") String registeredDate, @RequestParam ("propertyPrice") long propertyPrice, @RequestParam ("propertyImages") MultipartFile propertyImages, @RequestParam("propertyDocument") MultipartFile propertyDocument, @RequestParam("propertyAddress") String propertyAddress, @RequestParam("propertyDistrict") String propertyDistrict, @RequestParam("propertyState") String propertyState, HttpSession httpSession) throws IOException
 	{
@@ -53,6 +52,7 @@ public class PropertiesController
 		property.setPaymentStatus("Not Paid");
 		
 		httpSession.setAttribute("sellerId", sellerId);
+		httpSession.setAttribute("propertyName", propertyName);
 		userDAO.property(property);
 		}
 		else
@@ -60,7 +60,7 @@ public class PropertiesController
 			return "PropertyRegistration.jsp";
 		}
 		
-		return "SuccessPage.jsp";
+		return "SuccessPage3.jsp";
 	}
 	
 	
@@ -79,6 +79,14 @@ public class PropertiesController
 		List<Property> list = userDAO.pendingProperty();
 		model.addAttribute("list",list);
 		return "RegisteredPropertyAdminView.jsp";
+	}
+	
+	@GetMapping("/Authorized")
+	public String authorized(Model model)
+	{
+		List<Property> list = userDAO.authorizedProperties();
+		model.addAttribute("list",list);
+		return "RegisteredPropertiesTable.jsp";
 	}
 	
 	@PostMapping("/Approval")
@@ -128,12 +136,20 @@ public class PropertiesController
 		return "PropertyTableForUserDisplay.jsp";
 	}
 
-	@GetMapping("/Authorized")
-	public String authorized(Model model)
+	@GetMapping("/RegisterStatus")
+	public String registerStatus(@RequestParam("address") String address, @RequestParam("registerStatus") String registerStatus, Model model)
 	{
+		userDAO.registerUpdate(address, registerStatus);
 		List<Property> list = userDAO.authorizedProperties();
 		model.addAttribute("list",list);
-		return "RegisteredPropertyAdminView.jsp";
+		return "RegisteredPropertiesTable.jsp";
 	}
 	
+	@RequestMapping("/ClosedDeals")
+	public String registeredProperties(Model model)
+	{
+		List<Property> list = userDAO.registeredProperties();
+		model.addAttribute("list", list);
+		return "RetrivePropertiesTable.jsp";
+	}
 }

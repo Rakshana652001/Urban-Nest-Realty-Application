@@ -4,7 +4,7 @@
 <html lang="xml:lang">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>SuccessPage</title>
 <style type="text/css">
 body,button {
 	font-family: Arial, sans-serif;
@@ -23,6 +23,6 @@ body,button {
 </head>
 <body>
 <h4>Successfully Registered</h4>
-<a href="http://localhost:9000/#home"><button>Back to Home Page</button></a>
+<a href="CustomerWelcomePage.jsp"><button>Back to Home Page</button></a>
 </body>
 </html>

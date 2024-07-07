@@ -3,6 +3,7 @@ package com.chainsys.urbannestrealty.dao;
 import java.util.List;
 
 import com.chainsys.urbannestrealty.model.Property;
+import com.chainsys.urbannestrealty.model.Sales;
 import com.chainsys.urbannestrealty.model.User;
 
 public interface UserDAO 
@@ -34,4 +35,15 @@ public interface UserDAO
 	List<Property> industrial();
 	List<Property> commercial();
 	List<Property> authorizedProperties();
+	void sale(Sales sale);
+	List<Sales> propertiesUnderReview(String id);
+	void updateCustomerId(String customerId, String propertyAddress);
+	void registerUpdate(String address, String registerStatus);
+	List<Property> properties(String propertyName);
+	List<Sales> approveToBuy();
+	void updateApproval(String customerId, String approvalStatus);
+	List<Sales> readyToBuy(String id);
+	void updatePayment(String id, long yourAccountNumber, long senderAccountNumber, 
+			String purchasedDate);
+	List<Property> registeredProperties();
 }

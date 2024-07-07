@@ -84,7 +84,7 @@
     <a class="nav-link active" href="http://localhost:9000/#home">Home</a>
     
         <a href="SellerProfile">Profile</a>
-        <a href="PropertyRegistration.jsp">Property Registration</a>
+        <a href="PropertyRegistration.jsp">Post Property</a>
         <a href="RegisteredProperties">Registered Properties</a>
         <a href="PaidServlet">Completed Deals</a>
         <a href="http://localhost:9000/#home">Logout</a>

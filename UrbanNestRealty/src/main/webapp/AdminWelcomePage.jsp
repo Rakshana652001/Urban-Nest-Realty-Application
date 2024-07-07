@@ -73,7 +73,6 @@
         align-items: initial;
         font-size: 2rem;       
     }
-    
 </style>
 </head>
 <body>
@@ -85,13 +84,11 @@
         <a href="javascript:void(0)" class="dropbtn">Clients</a>
         <div class="dropdown-content">
         <nav class="navbar navbar-dark bg-dark">
-    
   </nav>
             <a href="SellerCustomerDetails">Seller</a>
             <a href="CustomerDetails">Customer</a>
         </div>
     </div>
-   
     <div class="dropdown">
         <a href="javascript:void(0)" class="dropbtn">Seller Properties</a>
         <div class="dropdown-content">
@@ -99,8 +96,8 @@
             <a href="Authorized">Authorized</a>
         </div>
     </div>
-    <a href="ApproveToBuyServlet">Payment Approval</a>
-    <a href="RegisteredPropertiesServlet">Closed Deals</a>
+    <a href="ApproveToBuy">Payment Approval</a>
+    <a href="ClosedDeals">Closed Deals</a>
     <a href="http://localhost:9000/#home">Logout</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>      

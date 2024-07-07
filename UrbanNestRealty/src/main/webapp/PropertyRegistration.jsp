@@ -86,14 +86,14 @@ button:hover {
     <label>Property Name: 
         <select id="propertyNameSelect" name="propertyNameSelect" onchange="autoFillPropertyDetails()" required>
             <option value="">Select Property</option>
-            <option value="101" data-name="Land">Land</option>
-            <option value="102" data-name="Residential">Residential(House)</option>
-            <option value="103" data-name="Commercial">Commercial(Showroom/Floor in complex/Shop)</option>
-            <option value="104" data-name="Industrial">Industrial(Warehouse/Loft)</option>
+            <option value="101" data-name="Residential(House)">Residential(House)</option>
+            <option value="102" data-name="Land">Land</option>
+            <option value="103" data-name="Industrial">Industrial(Warehouse/Loft)</option>
+            <option value="104" data-name="Commercial">Commercial(Showroom/Floor in complex/Shop)</option>
         </select>
     </label><br><br>
     <label>Property ID: <input type="text" id="propertyId" name="propertyId" readonly/></label><br><br>
-    <label>Property Name: <input type="text" id="propertyName" name="propertyName" readonly/></label><br><br>
+    <label>Property Name: <input type="text" id="propertyName" name="propertyName" placeholder="PG, house, land, showroom.." required/></label><br><br>
     <label>Registration Date: <input type="date" id="registeredDate" name="registeredDate" value="<%= registeredDate %>" readonly></label><br><br>
     <label>Property Price: <input type="number" id="propertyPrice" name="propertyPrice" required/></label><br><br>
     <label>Add Images: <input type="file" id="propertyImages" name="propertyImages" required/></label><br><br>
@@ -111,10 +111,8 @@ function autoFillPropertyDetails()
     var propertySelect = document.getElementById('propertyNameSelect');
     var selectedOption = propertySelect.options[propertySelect.selectedIndex];
     var propertyId = selectedOption.value;
-    var propertyName = selectedOption.getAttribute('data-name');
 
     document.getElementById('propertyId').value = propertyId;
-    document.getElementById('propertyName').value = propertyName;
 }
 
 function validateForm()

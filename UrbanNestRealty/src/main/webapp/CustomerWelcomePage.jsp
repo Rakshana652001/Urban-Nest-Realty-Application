@@ -84,8 +84,8 @@
 	<h2 class="text-center">Urban Nest Realty</h2>
 	    <a href="http://localhost:9000/#home">Home</a>
 		<a href="CustomerProfile">Profile</a>
-		<a href="RegisterdPropertiesServlet">Properties Under Review</a>
-		<a href="RegisterBuyPropertiesServlet">Ready-to-Purchase</a>
+		<a href="PropertiesUnderReview">Properties Under Review</a>
+		<a href="RegisterBuyProperties">Ready-to-Purchase</a>
 		<a href="BuyedPropertiesServlet">Purchased Properties</a>
 		<a href="http://localhost:9000/#home">Log Out</a>
 	</div>

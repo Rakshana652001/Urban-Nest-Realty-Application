@@ -6,10 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.urbannestrealty.mapper.ApproveSalesMapper;
+import com.chainsys.urbannestrealty.mapper.ClosedPropertyMapper;
 import com.chainsys.urbannestrealty.mapper.PropertyMapper;
 import com.chainsys.urbannestrealty.mapper.PropertyUserDisplayMapper;
+import com.chainsys.urbannestrealty.mapper.ReadyToBuyMapper;
+import com.chainsys.urbannestrealty.mapper.SalesMapper;
 import com.chainsys.urbannestrealty.mapper.UserMapper;
 import com.chainsys.urbannestrealty.model.Property;
+import com.chainsys.urbannestrealty.model.Sales;
 import com.chainsys.urbannestrealty.model.User;
 
 @Repository
@@ -20,6 +25,7 @@ public class UserDAOImplementation implements UserDAO
 	JdbcTemplate jdbcTemplate;
 	UserMapper mapper;
 	PropertyUserDisplayMapper propertyUserDisplayMapper;
+	ApproveSalesMapper approveSalesMapper;
 	
 	@Override
 	public void saveUserDetails(User user)
@@ -32,12 +38,10 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public String getAdminpassword(String generatedUserID) 
 	{
-		String adminPassword = "select password from user where id=? and (designation = 'Admin') and deleted_User=0";
+		String adminPassword = "select password from user where id=? and designation = 'Admin' and deleted_User=0";
 		String password = jdbcTemplate.queryForObject(adminPassword, String.class, generatedUserID);
 		return password;
 	}
-
-	
 	
 	@Override
 	public String getsellerId(String generatedUserID)
@@ -50,8 +54,8 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public String getcustomerId(String generatedUserID)
 	{
-		String sellerId = "select id from user where id=? and  designation = 'Customer' and deleted_User=0";
-		String seller = jdbcTemplate.queryForObject(sellerId, String.class, generatedUserID);
+		String sellerId = "select id from user where id=? and designation = 'Customer' and deleted_User=0";
+		String seller = jdbcTemplate.queryForObject(sellerId, String.class,generatedUserID);
 		return seller;
 	}
 	
@@ -131,16 +135,18 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public List<User> sellerSearch(String id) 
 	{
-		String retriveDetails = "select id, name, phone_number, designation, email_id, address, district, state from user where id=? and deleted_User=0 and designation='seller'";
-		List<User> list = jdbcTemplate.query(retriveDetails, new UserMapper(), id);
+		String retriveDetails = String.format("select id, name, phone_number, designation, email_id, address, district, state from user where (id like '%%%s%%' or name like '%%%s%%' or email_id like '%%%s%%') and deleted_User=0 and designation='seller'",id,id,id);
+		List<User> list = jdbcTemplate.query(retriveDetails, new UserMapper());
 		return list;
+		
+		
 	}
 	
 	@Override
 	public List<User> customerSearch(String id) 
 	{
-		String retriveDetails = "select id, name, phone_number, designation, email_id, address, district, state from user where id=? and deleted_User=0 and designation='customer'";
-		List<User> list = jdbcTemplate.query(retriveDetails, new UserMapper(), id);
+		String retriveDetails = String.format("select id, name, phone_number, designation, email_id, address, district, state from user where (id like '%%%s%%' or name like '%%%s%%' or email_id like '%%%s%%') and deleted_User=0 and designation='customer'",id,id,id);
+		List<User> list = jdbcTemplate.query(retriveDetails, new UserMapper());
 		return list;
 	}
 
@@ -172,18 +178,12 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public List<Property> sellerRegisteredProperties(String sellerId) 
 	{
-		String select = "select seller_id, property_name, property_id, approval, property_images, property_document, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status,payment_status from property_registration where seller_id=? and approval='Approved'";
+		String select = "select seller_id, property_name, property_id, approval, property_images, property_document, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status,payment_status from property_registration where seller_id=? and (approval='Approved' or approval='Rejected' or approval='Not Approved') and payment_status='Not Paid'";
 		List<Property> list = jdbcTemplate.query(select, new PropertyMapper(), sellerId);
 		return list;
 	}
 
-	@Override
-	public List<Property> pendingProperty() 
-	{
-		String select = "select seller_id, property_name, property_id, approval, property_images, property_document, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status,payment_status from property_registration where approval='Not Approved'";
-		List<Property> list = jdbcTemplate.query(select, new PropertyMapper());
-		return list;
-	}
+	
 
 	@Override
 	public void approval(Property property) 
@@ -197,35 +197,129 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public List<Property> residential() 
 	{
-		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_name='Residential' and deleted_User=0 and approval='Approved'";
+		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_id=101 and deleted_User=0 and approval='Approved' and register_status='Not Registered'";
 		List<Property> list = jdbcTemplate.query(residential, new PropertyUserDisplayMapper());
 		return list;
 	}
 
 	@Override
 	public List<Property> land() {
-		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_name='Land' and deleted_User=0 and approval='Approved'";
+		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_id=102 and deleted_User=0 and approval='Approved' and register_status='Not Registered'";
 		List<Property> list = jdbcTemplate.query(residential, new PropertyUserDisplayMapper());
 		return list;
 	}
 
 	@Override
 	public List<Property> industrial() {
-		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_name='Industrial' and deleted_User=0 and approval='Approved'";
+		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_id=103 and deleted_User=0 and approval='Approved' and register_status='Not Registered'";
 		List<Property> list = jdbcTemplate.query(residential, new PropertyUserDisplayMapper());
 		return list;
 	}
 
 	@Override
 	public List<Property> commercial() {
-		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_name='Commercial' and deleted_User=0 and approval='Approved'";
+		String residential = "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where property_id=104 and deleted_User=0 and approval='Approved' and register_status='Not Registered'";
 		List<Property> list = jdbcTemplate.query(residential, new PropertyUserDisplayMapper());
 		return list;
 	}
 
 	@Override
+	public List<Property> pendingProperty() 
+	{
+		String select = "select seller_id, property_name, property_id, approval, property_images, property_document, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status,payment_status from property_registration where approval='Not Approved'";
+		List<Property> list = jdbcTemplate.query(select, new PropertyMapper());
+		return list;
+	}
+	
+	@Override
 	public List<Property> authorizedProperties()
 	{
-		return null;
+		String select = "select seller_id, property_name, property_id, approval, property_images, property_document, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status,payment_status from property_registration where approval='Approved' and register_status='Not Registered'";
+		List<Property> list = jdbcTemplate.query(select, new PropertyMapper());
+		return list;
+	}
+
+	@Override
+	public void sale(Sales sale) 
+	{
+		String insert = "insert into sales_record (customer_id,seller_id, government_id, approval, property_address, payment_method, total_amount, payabel_amount, customer_account, seller_account, payed_status) values (?,?,?,?,?,?,?,?,?,?,?)";
+		Object[] params = {sale.getCustomerId(), sale.getSellerId(), sale.getGovernmentId(), sale.getApproval(), sale.getPropertyAddress(), sale.getPaymentMethod(), sale.getTotalAmount(), sale.getPayableAmount(), sale.getCustomerAccount(), sale.getSellerAccount(), sale.getPaidStatus()};
+		jdbcTemplate.update(insert, params);
+	}
+
+	@Override
+	public List<Sales> propertiesUnderReview(String id)
+	{
+		String retrive = "select customer_id,seller_id, government_id, approval, property_address, payment_method, total_amount, payabel_amount, payed_status from sales_record where customer_id=? and payed_status='Not Paid'";
+		List<Sales> list = jdbcTemplate.query(retrive, new SalesMapper(), id);
+		return list;
+	}
+
+	@Override
+	public void updateCustomerId(String customerId,String propertyAddress) 
+	{
+		String update = "update property_registration set customer_id=? where property_address=?";
+		Object[] params = {customerId, propertyAddress};
+		jdbcTemplate.update(update, params);
+		
+	}
+
+	@Override
+	public void registerUpdate(String address, String registerStatus)
+	{
+		String update = "update property_registration set register_status=? where property_address=?";
+		Object[] params = {registerStatus,address};
+		jdbcTemplate.update(update, params);
+	}
+
+	@Override
+	public List<Property> properties(String propertyName)
+	{
+		String residential = String.format( "select seller_id, property_name, property_id, approval, property_images, property_price, property_address, property_district, property_state, registered_date from property_registration where (property_name like '%%%s%%') and deleted_User=0 and approval='Approved' and register_status='Not Registered'",propertyName);
+		List<Property> list = jdbcTemplate.query(residential, new PropertyUserDisplayMapper());
+		return list;		
+	}
+
+	@Override
+	public List<Sales> approveToBuy()
+	{
+		String retrive = "select customer_id, seller_id, property_address, payment_method, total_amount, payabel_amount, approval from sales_record where approval='Not Approved' and deleted_User=0";
+		List<Sales> list = jdbcTemplate.query(retrive, new ApproveSalesMapper());
+		return list;
+	}
+
+	@Override
+	public void updateApproval(String customerId, String approvalStatus) 
+	{
+		String update = "update sales_record set approval=? where customer_id=?";
+		Object[] params = {approvalStatus, customerId};
+		jdbcTemplate.update(update, params);		
+	}
+
+	@Override
+	public List<Sales> readyToBuy(String id) 
+	{
+		String retrive = "select customer_id, seller_id, property_address ,total_amount, payabel_amount, payment_method, approval from sales_record where customer_id=? and deleted_User=0 and payed_status='Not Paid'";
+		List<Sales> list = jdbcTemplate.query(retrive, new ReadyToBuyMapper(), id);
+		return list;		
+	}
+
+	@Override
+	public void updatePayment(String id, long yourAccountNumber, long senderAccountNumber,
+			String purchasedDate) {
+		String update= "update sales_record set customer_account=?, seller_account=?, purchased_date=?, payed_status=? where customer_id=?";
+		Object[] params = {yourAccountNumber, senderAccountNumber, purchasedDate, "Paid",id};
+		jdbcTemplate.update(update,params);
+		String updatePropertyTable = "update property_registration set purchased_date=?, payment_status=? where customer_id=?";
+		Object[] params1 = {purchasedDate, "Paid", id};
+		jdbcTemplate.update(updatePropertyTable, params1);
+	}
+
+	@Override
+	public List<Property> registeredProperties()
+	{
+		String retrive = "select seller_id, property_name, approval, property_images, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status, payment_status from property_registration where payment_status='Paid'";
+		List<Property> list = jdbcTemplate.query(retrive, new ClosedPropertyMapper());
+		return list;
 	}
 }

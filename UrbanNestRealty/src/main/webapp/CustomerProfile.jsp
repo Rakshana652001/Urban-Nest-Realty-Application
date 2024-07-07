@@ -18,6 +18,7 @@
         text-align: center;
         margin-top: 20px;
         color: white;
+        font-size: 25px;
     }
     .container {
         display: flex;

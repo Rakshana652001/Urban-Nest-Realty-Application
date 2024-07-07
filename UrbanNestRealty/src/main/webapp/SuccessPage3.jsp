@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="xml:lang">
+<html lang="xml">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Successfully Registered</title>
 <style type="text/css">
 body,button {
 	font-family: Arial, sans-serif;
@@ -23,6 +23,6 @@ body,button {
 </head>
 <body>
 <h4>Successfully Registered</h4>
-<a href="http://localhost:9000/#home"><button>Back to Home Page</button></a>
+<a href="SellerWelcomePage.jsp"><button>Back to Home Page</button></a>
 </body>
 </html>

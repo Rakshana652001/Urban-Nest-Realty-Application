@@ -94,26 +94,37 @@ button:hover, .btn-action:hover {
 	</thead>
 	
 	<%ArrayList<User> list = (ArrayList<User>)request.getAttribute("list");
-	for(User object:list)
+	if(list != null && !list.isEmpty())
 	{
-	%>
-		<tr>
-			<td><%=object.getGeneratedUserID() %></td>
-			<td><%=object.getName() %></td>
-			<td><%=object.getPhoneNumber() %></td>
-			<td><%=object.getEmailID() %></td>
-			<td><%=object.getAddress() %></td>
-			<td><%=object.getDistrict() %></td>
-			<td><%=object.getState() %></td>
-			<td>
-		<form action="deletecustomer" method="post">
-  		<input type="hidden" name="deleteName" value="<%= object.getName()%>">
-  		<input type="submit" name="delete" value="Delete">
-  		</form>
-  		</td>  		
-		</tr>
-	<%
+		for(User object:list)
+		{
+		%>
+			<tr>
+				<td><%=object.getGeneratedUserID() %></td>
+				<td><%=object.getName() %></td>
+				<td><%=object.getPhoneNumber() %></td>
+				<td><%=object.getEmailID() %></td>
+				<td><%=object.getAddress() %></td>
+				<td><%=object.getDistrict() %></td>
+				<td><%=object.getState() %></td>
+				<td>
+			<form action="deletecustomer" method="post">
+	  		<input type="hidden" name="deleteName" value="<%= object.getName()%>">
+	  		<input type="submit" name="delete" value="Delete">
+	  		</form>
+	  		</td>  		
+			</tr>
+		<%
+		}
 	}
+	else
+	{
+	  %>
+	  <tr>
+	  	<td colspan="15">No Records Found</td>
+	  </tr>
+	  <%
+	}	
 	  %>
 </table>
 </body>

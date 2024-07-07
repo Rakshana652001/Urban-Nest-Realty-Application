@@ -72,12 +72,12 @@
         font-size: 18px;
         margin-top: 20px;
     }
-    form[action="http://localhost:9000/#home"] {
+    form[action="http://localhost:9000/#realties"] {
         display: flex;
         justify-content: center;
         margin: 20px 0;
     }
-    form[action="http://localhost:9000/#home"] button {
+    form[action="http://localhost:9000/#realties"] button {
         background-color: black;
         color: white;
         padding: 10px 20px;
@@ -89,8 +89,9 @@
 </style>
 </head>
 <body>
+
 <h3>Property Details</h3>
-<form action="http://localhost:9000/#home" style="flex: 1;">
+<form action="http://localhost:9000/#realties" style="flex: 1;">
    <button>Back to Home</button>
 </form>
 <div class="container">

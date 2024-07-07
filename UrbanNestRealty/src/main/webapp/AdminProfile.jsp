@@ -17,8 +17,9 @@
     }
     h3 {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 30px;
         color: white;
+        font-size: 25px;
     }
     .container {
         display: flex;

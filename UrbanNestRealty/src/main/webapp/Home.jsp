@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,153 +5,135 @@
 <title>Urban Nest Realty</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
-body
-{
-    font-family: 'Roboto', sans-serif;
-    font-size: large;
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lora", serif;
+}
+
+section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1, p {
+    color: #343a40;
+}
+
+.navbar {
+    background-color: #FF9999;
+    width: 100%;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
-    
 }
 
-h1{
-font-family: "Times New Roman", Times, serif;
-color: black;
-}
-.navbar 
-{
-    background-color: #343a40;
-    padding: 20px 30px;
-    border-bottom: 1px solid #e7e7e7;
-    position: sticky;
-    top: 0;
-  	left: 0;
-  	z-index: 100;
+.navbar-brand img {
+    height: 80px;
 }
 
-.navbar-nav 
-{
-    display: flex;
-    align-items: center;
+#navbarSupportedContent a{
+  font-size: 19px;
+}
+#navbarSupportedContent a:hover{
+  border-bottom: 3px solid white;
+  
+}
+.active:hover{
+  color: black !important;
+  border-radius: 12px;
 }
 
-.nav-item 
-{
-    list-style: none;
-    margin-right: 15px;
-}
-
-.nav-link 
-{
-    color: #ffffff;
-    padding: 8px 15px;
-    border-radius: 5px;
-}
-
-.nav-link:hover, .nav-link.active 
-{
-    background-color: #495057;
-    color: #ffffff;
-}
-
-.dropdown-menu 
-{
-    background-color: #343a40;
+.dropdown-menu {
+    background-color: #FF9999;
     border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-item 
-{
-    color: #ffffff;
-    padding: 10px 20px;
-    text-decoration: none;
+.dropdown-item{
+     color: white;
 }
 
-.dropdown-item:hover 
-{
-    background-color: #495057;
-    color: #ffffff;
+.dropdown-item:hover {
+    background-color: #FF9999;
+    border-radius: 12px;
 }
 
-.form-control 
-{
+.form-control {
     border-radius: 5px;
     border: 1px solid #ced4da;
     padding: 8px 15px;
 }
 
-.form-control:focus 
-{
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-}
-
-#navbarSupportedContent 
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#search 
-{
-    margin-left: auto;
-}
-
-.card img
-{
+.card img {
     height: 200px;
     object-fit: cover;
 }
-.btn-outline-dark{
-  background-color:rgba(238, 43, 43, 0)!important;
-  border-width: 2px !important;
-  border-color: rgb(75, 3, 3) !important;
-  color: black !important;
+
+.btn-outline-dark {
+    border-color:  !important;
 }
 
-section{
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+
+#footer {
+    color: white;
+    background-color: #FDDFDF;
+    padding: 10px 0;
+    text-align: center;
 }
 
-#footer
-{
-  color: white;
-  bottom: 0;
-  left: 0;
-  z-index: 100;
-  padding: .4rem .4rem;
-  background-color: #343a40; 
+#home {
+    background: url('Images/home.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-#home{
-  background: url(Images/Flat.webp);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  }
+.card {
+    background: #FF9999 !important;
+    box-shadow: 5px 5px 20px rgb(19, 19, 21);
+    border-radius: 20px !important;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
 
+#contact h2 {
+    margin-bottom: 20px;
+}
+
+#contact .form-group {
+    margin-bottom: 20px;
+}
 </style>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark">
  <div class="container">
-  
+     <a class="navbar-brand" href="#">
+        <img src="Images/Nest Realty.jpg" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="javascript:history.back()">Back</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" href="#home">Home</a>
         </li>
@@ -176,14 +156,17 @@ section{
           </div>
         </li>
       </ul>
+      <form class="form-inline my-2 my-lg-0" action="Search">
+        <input class="form-control mr-sm-2" type="search" name="propertyName" placeholder="Search..(Plot, showroom, PG, complex floor)" aria-label="Search">
+      </form>
     </div>
   </div>
 </nav>
-<section id="home" class="container mt-5">
-    <h1 class="text-center">Urban Nest Realty</h1>
+<section id="home">
+    
 </section>
 <section id="realties" class="container mt-5">
-    <div class="row">
+    <div class="row justify-content-around">
         <div class="col-lg-3 col-md-4 col-12 mb-4">
             <div class="card">
                 <img src="Images/House.jpg" class="card-img-top" alt="House">
@@ -222,31 +205,41 @@ section{
         </div>
     </div>
 </section>
-<section id="about">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-lg-4 col-lg-4 col-6">
-              <img alt="Aboutus" src="Images/quality.jpg" class="card-img-top">
-            </div>
-            <div class="col-lg-6 col-lg-6 col-12">
-              <h1>About Urban Nest Realty</h1>
-              	<p>Welcome to Urban Nest Realty, your trusted partner in real estate transactions. Our mission is to provide exceptional service and help you find your dream property. Whether you are buying, selling, or investing, we are here to guide you every step of the way.</p>
-	        	<p>With years of experience in the real estate industry, our team of professionals is committed to delivering outstanding results. We pride ourselves on transparency, integrity, and customer satisfaction.</p>
-    	    	<p>Explore our website to discover a wide range of properties, from residential homes to commercial spaces. Feel free to contact us for any inquiries or assistance. We look forward to serving you!</p>
-            </div>
-          </div>
+<section id="about" class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <img src="Images/quality.jpg" alt="About Us">
         </div>
+        <div class="col-lg-6">
+            <h1>About Urban Nest Realty</h1>
+            <p>Welcome to Urban Nest Realty, your trusted partner in real estate transactions. Our mission is to provide exceptional service and help you find your dream property. Whether you are buying, selling, or investing, we are here to guide you every step of the way.</p>
+            <p>With years of experience in the real estate industry, our team of professionals is committed to delivering outstanding results. We pride ourselves on transparency, integrity, and customer satisfaction.</p>
+            <p>Explore our website to discover a wide range of properties, from residential homes to commercial spaces. Feel free to contact us for any inquiries or assistance. We look forward to serving you!</p>
+        </div>
+    </div>
 </section>
-<section id="contact">
-	<div>
-		
-	</div>
+<section id="contact" class="container mt-5">
+    <div class="text-center">
+        <h2>Contact Us</h2>
+        <p>If you have any questions, please feel free to reach out to us at rakshana@gmail.com or call us at 7339263883.</p>
+        <form action="ContactServlet" method="post">
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="query">Your Query:</label>
+                <textarea class="form-control" id="query" name="query" rows="4" placeholder="Enter your query" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-dark">Submit</button>
+        </form>
+    </div>
 </section>
 <footer id="footer">
-      <p class="text-center"> Conditions of Use and Sale Privacy Notice Interest-Based Ads</p>
-        <p class="text-center"> 2024 Company, Inc</p>
+    <p>&copy; 2024 Urban Nest Realty. All rights reserved.</p>
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

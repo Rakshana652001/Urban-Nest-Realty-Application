@@ -3,7 +3,6 @@ package com.chainsys.urbannestrealty.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.urbannestrealty.dao.UserDAO;
+import com.chainsys.urbannestrealty.model.Property;
 import com.chainsys.urbannestrealty.model.User;
 import com.chainsys.urbannestrealty.validation.Validation;
 
@@ -62,52 +62,38 @@ public class UserController
 	@PostMapping("/Login")
 	public String login(@RequestParam("generatedUserID") String generatedUserID, @RequestParam("password") String password, HttpSession httpSession, Model model)
 	{
+		
 		try
 		{
-			if(generatedUserID.equals("UNR_Admin_1"))
+			if(generatedUserID.equals("UNR_Admin_1")&&password.equals(userDAO.getAdminpassword(generatedUserID)) || Boolean.FALSE.equals(validation.passwordValidation(password,model)))
 			{
-				if(password.equals(userDAO.getAdminpassword(generatedUserID)) || Boolean.FALSE.equals(validation.passwordValidation(password,model)))
-				{
-					httpSession.setAttribute("UNR_Admin_1", generatedUserID);
-					return "AdminWelcomePage.jsp";
-				}
-				else
-				{
-					return "AdminLogin.jsp";
-				}
+				httpSession.setAttribute("UNR_Admin_1", generatedUserID);
+				return "AdminWelcomePage.jsp";
 			}
-			else if(generatedUserID.equals(userDAO.getsellerId(generatedUserID)))
+			
+			if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID))&&password.equals(userDAO.getCustomerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
 			{
-				if(password.equals(userDAO.getsellerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
-				{
-					httpSession.setAttribute("sellerId", generatedUserID);
-					return "SellerWelcomePage.jsp";
-				}
-				else
-				{
-					return "AdminLogin.jsp";
-				}
-			}
-			else if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID)))
-			{
-				if(password.equals(userDAO.getCustomerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
-				{
-					httpSession.setAttribute("customerId", generatedUserID);
-					return "CustomerWelcomePage.jsp";
-				}
-				else
-				{
-					return "AdminLogin.jsp";
-				}				
+				httpSession.setAttribute("customerId", generatedUserID);
+				return "CustomerWelcomePage.jsp";
 			}
 			else
 			{
 				return "AdminLogin.jsp";
-			}	
+			}			
 		}
-		catch (EmptyResultDataAccessException e) {
-	        return "AdminLogin.jsp";
-	    }
+		catch(Exception e)
+		{
+			if(generatedUserID.equals(userDAO.getsellerId(generatedUserID))&&password.equals(userDAO.getsellerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
+			{
+				httpSession.setAttribute("sellerId", generatedUserID);
+				return "SellerWelcomePage.jsp";
+			}
+			else
+			{
+				return "AdminLogin.jsp";
+			}
+		}
+		
 	}
 	
 	@GetMapping("/AdminProfile")
@@ -248,6 +234,14 @@ public class UserController
 		List<User> list = userDAO.customerSearch(id);
 		model.addAttribute("list",list);
 		return "CustomerList.jsp";
+	}
+	
+	@RequestMapping("/Search")
+	public String searchProperties(Model model, @RequestParam("propertyName") String propertyName)
+	{
+		List<Property> list = userDAO.properties(propertyName);
+		model.addAttribute("list",list);
+		return "PropertyTableForUserDisplay.jsp";
 	}
 	
 	
