@@ -8,7 +8,7 @@
 <style type="text/css">
 body {
     font-family: Arial, sans-serif;
-    background-color: #FF9999;
+    background-color: #818589;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -63,16 +63,12 @@ button {
     margin-top: 20px;
     border: none;
     border-radius: 4px;
-    background-color: #FF9999;
+    background-color: #818589;
     color: white;
     font-size: 16px;
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #F4E3FF;
-    color: black !important;
-}
 
 </style>
 </head>
@@ -86,6 +82,7 @@ button:hover {
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Rakshana@12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
         
+        <p>Don't have an account?  <a href="UserRegistration.jsp">Register</a></p>
         <button type="submit">Login</button>
     </form>
 </div>

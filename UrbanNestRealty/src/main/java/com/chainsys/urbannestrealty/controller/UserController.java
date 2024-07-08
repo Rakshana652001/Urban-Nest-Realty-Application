@@ -71,7 +71,7 @@ public class UserController
 				return "AdminWelcomePage.jsp";
 			}
 			
-			if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID))&&password.equals(userDAO.getCustomerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
+			else if(generatedUserID.equals(userDAO.getcustomerId(generatedUserID))&&password.equals(userDAO.getCustomerPassword(generatedUserID))||Boolean.FALSE.equals(validation.passwordValidation(password,model)))
 			{
 				httpSession.setAttribute("customerId", generatedUserID);
 				return "CustomerWelcomePage.jsp";
@@ -79,7 +79,8 @@ public class UserController
 			else
 			{
 				return "AdminLogin.jsp";
-			}			
+			}	
+			
 		}
 		catch(Exception e)
 		{
@@ -244,5 +245,18 @@ public class UserController
 		return "PropertyTableForUserDisplay.jsp";
 	}
 	
+	@RequestMapping("/LogOut")
+	public String logOut(HttpSession session)
+	{
+		session.invalidate();
+		return "Home.jsp";
+	}
+	
+	@PostMapping("/Contact")
+	public String contact(@RequestParam("email") String email, @RequestParam("query") String query)
+	{
+		
+		return query;
+	}
 	
 }

@@ -9,7 +9,7 @@
 <style>
     body{
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     background-size: cover;
  	background-position: center;
   	position: relative;
@@ -84,7 +84,7 @@
         box-sizing: border-box;
     }
     .dropdown-content button:hover {
-        background-color: #ddd;
+        background-color: #818589;
     }
     .dropdown:hover .dropdown-content {
         display: block;
@@ -106,9 +106,14 @@
     button:hover {
         background-color: #333;
     }
+    form {
+    display: flex;
+    flex-direction: column;
+}
 </style>
 </head>
 <body>
+<div class="container">
 <form action="UserRegistration" id="registrationForm" method="post">
     <h4>User Registration</h4>
     <label for="name">Name: <input type="text" id="name" name="name" placeholder="Rakshana" required/></label>
@@ -134,6 +139,10 @@
         <button type="button" onclick="validateForm()">Register</button>
     </div>
 </form>
+<form action="http://localhost:9000/#home">
+	<button>Back to Home</button>
+</form>
+</div>
 <script>
 let codeNumber = localStorage.getItem('codeNumber') ? parseInt(localStorage.getItem('codeNumber')) : 1; 
 
@@ -205,7 +214,6 @@ function validateForm()
     setTimeout(function(){ form.submit(); }, 5000);
 }
 </script>
-<a href="http://localhost:9000/#home"><button type="submit" >Back to home</button></a>
 </body>
 </html>
     

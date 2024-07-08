@@ -9,7 +9,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -48,7 +48,7 @@ input[type="submit"] {
     box-sizing: border-box;
 }
 input[type="submit"] {
-    background-color: black;
+    background-color: #818589;
     color: white;
     cursor: pointer;
     margin-top: 20px;
@@ -66,10 +66,10 @@ input[type="submit"]:hover {
     <h3>Payment Form</h3>
     <form action="PayNow" id="paymentForm" method="post" onsubmit="return validateForm()">
         <label for="yourAccountNumber">Your Account Number: </label>
-        <input type="number" id="yourAccountNumber" name="yourAccountNumber" placeholder="Enter your Bank Account Number" required/>
+        <input type="number" id="yourAccountNumber" maxlength="12" name="yourAccountNumber" placeholder="Enter your Bank Account Number" required/>
         
         <label for="senderAccountNumber">Account Number of the Receiver:</label>
-        <input type="number" id="senderAccountNumber" name="senderAccountNumber" placeholder="Enter the Bank Account Number" required/>
+        <input type="number" id="senderAccountNumber" maxlength="12" name="senderAccountNumber" placeholder="Enter the Bank Account Number" required/>
         
         <label for="amount">Enter the Amount to send:</label>
         <input type="number" id="amount" name="amount" value="<%= request.getParameter("amount") %>" readonly/>

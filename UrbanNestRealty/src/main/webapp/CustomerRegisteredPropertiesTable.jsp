@@ -10,7 +10,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -60,7 +60,7 @@ button, .btn-action, input[type="submit"] {
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #000100;
+    background-color: #818589;
     color: white;
     cursor: pointer;
     margin: 5px;

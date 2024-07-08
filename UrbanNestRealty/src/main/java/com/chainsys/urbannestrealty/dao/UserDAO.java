@@ -46,4 +46,6 @@ public interface UserDAO
 	void updatePayment(String id, long yourAccountNumber, long senderAccountNumber, 
 			String purchasedDate);
 	List<Property> registeredProperties();
+	List<Sales> completedDeals(String id);
+	List<Property> purchasedProperties(String id);
 }

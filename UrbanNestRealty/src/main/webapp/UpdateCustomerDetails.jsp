@@ -8,7 +8,7 @@
 <style>
     body{
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     background-size: cover;
  	background-position: center;
   	position: relative;
@@ -44,54 +44,8 @@
         border-radius: 4px;
         box-sizing: border-box;
     }
-    .dropdown {
-        position: relative;
-        display: inline-block;
-        margin-bottom: 15px;
-        width: 100%;
-    }
-    .dropbtn {
-        background-color: #f9f9f9;
-        color: black;
-        padding: 8px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        text-align: left;
-        box-sizing: border-box;
-    }
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: white;
-        min-width: 100%;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-        box-sizing: border-box;
-    }
-    .dropdown-content button {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        border: none;
-        background-color: white;
-        text-align: left;
-        box-sizing: border-box;
-    }
-    .dropdown-content button:hover {
-        background-color: #ddd;
-    }
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-    }
     button {
-        background-color: black;
+        background-color: #818589;
         color: white;
         padding: 10px 20px;
         border: none;

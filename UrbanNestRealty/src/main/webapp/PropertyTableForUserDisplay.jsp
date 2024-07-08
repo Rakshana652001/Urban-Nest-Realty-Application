@@ -10,7 +10,7 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: grey;
+        background-color: #818589;
         margin: 0;
         padding: 0;
     }
@@ -54,7 +54,7 @@
         margin: 0;
     }
     .btn-buy {
-        background-color: black;
+        background-color: #818589;
         color: white;
         padding: 10px 20px;
         border: none;

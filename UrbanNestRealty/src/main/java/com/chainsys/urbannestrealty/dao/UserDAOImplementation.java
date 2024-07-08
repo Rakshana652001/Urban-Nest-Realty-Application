@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.chainsys.urbannestrealty.mapper.ApproveSalesMapper;
 import com.chainsys.urbannestrealty.mapper.ClosedPropertyMapper;
+import com.chainsys.urbannestrealty.mapper.CompletedDealsMapper;
 import com.chainsys.urbannestrealty.mapper.PropertyMapper;
 import com.chainsys.urbannestrealty.mapper.PropertyUserDisplayMapper;
+import com.chainsys.urbannestrealty.mapper.PurchasedPropertiesMapper;
 import com.chainsys.urbannestrealty.mapper.ReadyToBuyMapper;
 import com.chainsys.urbannestrealty.mapper.SalesMapper;
 import com.chainsys.urbannestrealty.mapper.UserMapper;
@@ -26,6 +28,8 @@ public class UserDAOImplementation implements UserDAO
 	UserMapper mapper;
 	PropertyUserDisplayMapper propertyUserDisplayMapper;
 	ApproveSalesMapper approveSalesMapper;
+	CompletedDealsMapper completedDealsMapper;
+	PurchasedPropertiesMapper purchasedPropertiesMapper;
 	
 	@Override
 	public void saveUserDetails(User user)
@@ -310,6 +314,7 @@ public class UserDAOImplementation implements UserDAO
 		String update= "update sales_record set customer_account=?, seller_account=?, purchased_date=?, payed_status=? where customer_id=?";
 		Object[] params = {yourAccountNumber, senderAccountNumber, purchasedDate, "Paid",id};
 		jdbcTemplate.update(update,params);
+		
 		String updatePropertyTable = "update property_registration set purchased_date=?, payment_status=? where customer_id=?";
 		Object[] params1 = {purchasedDate, "Paid", id};
 		jdbcTemplate.update(updatePropertyTable, params1);
@@ -320,6 +325,22 @@ public class UserDAOImplementation implements UserDAO
 	{
 		String retrive = "select seller_id, property_name, approval, property_images, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status, payment_status from property_registration where payment_status='Paid'";
 		List<Property> list = jdbcTemplate.query(retrive, new ClosedPropertyMapper());
+		return list;
+	}
+
+	@Override
+	public List<Sales> completedDeals(String id) 
+	{
+		String retrive = "select customer_id, government_id, property_address, payment_method, total_amount, payabel_amount, customer_account, seller_account, purchased_date, payed_status from sales_record where seller_id=? and payed_status = 'Paid'";
+		List<Sales> list = jdbcTemplate.query(retrive, new CompletedDealsMapper(), id);
+		return list;
+	}
+
+	@Override
+	public List<Property> purchasedProperties(String id)
+	{
+		String retrive = "select seller_id, property_name, property_document, property_price, property_address, property_district, registered_date, purchased_date, customer_id, register_status, payment_status from property_registration where customer_id=? and payment_status='Paid'";
+		List<Property> list = jdbcTemplate.query(retrive, new PurchasedPropertiesMapper(), id);
 		return list;
 	}
 }

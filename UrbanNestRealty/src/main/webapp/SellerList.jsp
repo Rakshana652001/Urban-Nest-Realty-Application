@@ -10,7 +10,7 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     margin: 0;
     padding: 20px;
     display: flex;
@@ -51,7 +51,7 @@ button, .btn-action, input {
     padding: 10px;
     border: none;
     border-radius: 12px;
-    background-color: #000100;
+    background-color: #818589;
     color: white;
     cursor: pointer;
     flex: 1;

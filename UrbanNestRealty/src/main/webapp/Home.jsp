@@ -27,10 +27,28 @@ h1, p {
 }
 
 .navbar {
-    background-color: #FF9999;
+    background-color: #818589;
     width: 100%;
     margin: 0;
     padding: 0;
+    position: sticky;
+  	top: 0;
+  	left: 0;
+}
+
+.nav-item {
+	position: relative;
+	right: 25px;  
+}
+ 
+.nav-item.active {
+	border-bottom: 2.5px solid white;
+	}
+ 
+.navbar-brand
+{
+	position: relative;
+	right: 40px;
 }
 
 .navbar-brand img {
@@ -41,8 +59,7 @@ h1, p {
   font-size: 19px;
 }
 #navbarSupportedContent a:hover{
-  border-bottom: 3px solid white;
-  
+  border-bottom: 2.5px solid white;
 }
 .active:hover{
   color: black !important;
@@ -50,7 +67,7 @@ h1, p {
 }
 
 .dropdown-menu {
-    background-color: #FF9999;
+    background-color: gray;
     border: none;
 }
 
@@ -59,7 +76,7 @@ h1, p {
 }
 
 .dropdown-item:hover {
-    background-color: #FF9999;
+    background-color: gray;
     border-radius: 12px;
 }
 
@@ -78,17 +95,18 @@ h1, p {
     border-color:  !important;
 }
 
-
-
 #footer {
     color: white;
-    background-color: #FDDFDF;
+    background-color: gray;
     padding: 10px 0;
     text-align: center;
 }
+#footer p{
+	color: white;
+}
 
 #home {
-    background: url('Images/home.png') no-repeat center center;
+    background: url('Images/welcome.jpg') no-repeat center center;
     background-size: cover;
     color: white;
     text-align: center;
@@ -97,10 +115,10 @@ h1, p {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    
 }
 
 .card {
-    background: #FF9999 !important;
     box-shadow: 5px 5px 20px rgb(19, 19, 21);
     border-radius: 20px !important;
     overflow: hidden;
@@ -116,22 +134,25 @@ h1, p {
 #contact .form-group {
     margin-bottom: 20px;
 }
+#search
+{
+  	position: relative;
+	left: 27rem;
+}
 </style>
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-expand-lg navbar-dark">
  <div class="container">
-     <a class="navbar-brand" href="#">
+     <a class="navbar-brand">
         <img src="Images/Nest Realty.jpg" alt="Logo">
     </a>
+    
+    <!-- <a class="navbar-brand" href="javascript:history.back()">Back</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="javascript:history.back()">Back</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -146,17 +167,11 @@ h1, p {
         <li class="nav-item">
           <a class="nav-link active" href="#contact">Contact</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Account
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="UserRegistration.jsp">Register</a>
-            <a class="dropdown-item" href="AdminLogin.jsp">Login</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link active" href="AdminLogin.jsp">Login</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" action="Search">
+      <form class="form-inline my-2 my-lg-0" action="Search" id="search">
         <input class="form-control mr-sm-2" type="search" name="propertyName" placeholder="Search..(Plot, showroom, PG, complex floor)" aria-label="Search">
       </form>
     </div>
@@ -221,11 +236,11 @@ h1, p {
 <section id="contact" class="container mt-5">
     <div class="text-center">
         <h2>Contact Us</h2>
-        <p>If you have any questions, please feel free to reach out to us at rakshana@gmail.com or call us at 7339263883.</p>
-        <form action="ContactServlet" method="post">
+        <p>If you have any questions, please feel free to reach out to call us at 7339263883.</p>
+        <form action="Contact" method="post">
             <div class="form-group">
                 <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" class="form-control" id="email" name="email" value="raksha@gmail.com" readonly>
             </div>
             <div class="form-group">
                 <label for="query">Your Query:</label>
@@ -241,5 +256,21 @@ h1, p {
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded',
+	    function () {
+	        const navItems = document
+	            .querySelectorAll('.nav-item');
+	 
+	        navItems.forEach(item => {
+	            item.addEventListener('click',
+	                function () {
+	                    navItems.forEach(navItem => navItem
+	                        .classList.remove('active'));
+	                    this.classList.add('active');
+	                });
+	        });
+	    });
+</script>
 </body>
 </html>

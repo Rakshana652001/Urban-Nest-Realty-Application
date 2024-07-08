@@ -9,7 +9,7 @@
 <style type="text/css">
 body {
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -63,7 +63,7 @@ button {
     margin-top: 20px;
     border: none;
     border-radius: 4px;
-    background-color: #000100;
+    background-color: #818589;
     color: white;
     font-size: 16px;
     cursor: pointer;

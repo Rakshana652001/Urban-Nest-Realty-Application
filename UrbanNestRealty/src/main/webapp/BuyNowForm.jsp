@@ -6,7 +6,7 @@
 <style>
     body{
     font-family: Arial, sans-serif;
-    background-color: grey;
+    background-color: #818589;
     background-size: cover;
  	background-position: center;
   	position: relative;

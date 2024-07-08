@@ -70,4 +70,26 @@ public class Validation
 		}
 		return match;
 	}
+
+	public Object accountNumber(long yourAccountNumber, long senderAccountNumber, Model model) 
+	{
+		Pattern p = Pattern.compile("[0-9]{12}");
+		Matcher m = p.matcher(Long.toString(yourAccountNumber));
+		Matcher m2 = p.matcher(Long.toString(senderAccountNumber));
+		boolean match = m.matches();
+		boolean match2 = m2.matches();
+		if(Boolean.FALSE.equals(match))
+		{
+			String errorMessage = yourAccountNumber+" is a invalid account number, Account number want to be only 12 digits";
+			model.addAttribute(errorMessage, model);
+			return false;
+		}
+		else if(Boolean.FALSE.equals(match2))
+		{
+			String errorMessage = senderAccountNumber+" is a invalid account number, Account number want to be only 12 digits";
+			model.addAttribute(errorMessage, model);
+			return false;
+		}
+		return match;
+	}
 }

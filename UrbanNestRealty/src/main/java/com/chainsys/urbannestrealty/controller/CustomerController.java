@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.chainsys.urbannestrealty.dao.UserDAO;
+import com.chainsys.urbannestrealty.model.Property;
 import com.chainsys.urbannestrealty.model.Sales;
+import com.chainsys.urbannestrealty.validation.Validation;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -21,6 +23,8 @@ public class CustomerController
 {
 	@Autowired
 	UserDAO userDAO;
+	@Autowired
+	Validation validation;
 	
 	@PostMapping("/Purchase")
 	public String purchase(@RequestParam("customerId") String customerId, @RequestParam("governmentId") MultipartFile governmentId, @RequestParam("sellerId") String sellerId, @RequestParam("propertyId") String propertyId, @RequestParam("propertyName") String propertyName, @RequestParam("propertyAddress") String propertyAddress, @RequestParam("propertyPrice") long propertyPrice, @RequestParam("payableAmount") double payableAmount, @RequestParam("paymentMethod") String paymentMethod, HttpSession httpSession) throws IOException
@@ -90,11 +94,28 @@ public class CustomerController
 	}
 	
 	@RequestMapping("/PayNow")
-	public String payNow(@RequestParam("yourAccountNumber") long yourAccountNumber, @RequestParam("senderAccountNumber") long senderAccountNumber, @RequestParam("amount") Double amount, @RequestParam("purchasedDate") String purchasedDate, HttpSession session)
+	public String payNow(Model model,@RequestParam("yourAccountNumber") long yourAccountNumber, @RequestParam("senderAccountNumber") long senderAccountNumber, @RequestParam("amount") Double amount, @RequestParam("purchasedDate") String purchasedDate, HttpSession session)
 	{
 		String id = (String)session.getAttribute("customerId");
-		userDAO.updatePayment(id, yourAccountNumber, senderAccountNumber, purchasedDate);
-		return "CustomerWelcomePage.jsp";
+		if(Boolean.FALSE.equals(validation.accountNumber(yourAccountNumber, senderAccountNumber,model)))
+		{
+			userDAO.updatePayment(id, yourAccountNumber, senderAccountNumber, purchasedDate);
+			return "CustomerWelcomePage.jsp";
+		}
+		else
+		{
+			return "PayNow.jsp";
+		}
+		
+	}
+	
+	@RequestMapping("/PurchasedProperties")
+	public String purchasedProperties(Model model, HttpSession session)
+	{
+		String id = (String)session.getAttribute("customerId");
+		List<Property> list = userDAO.purchasedProperties(id);
+		model.addAttribute("list", list);
+		return "BuyedPropertiesCustomerViewTable.jsp";
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.chainsys.urbannestrealty.dao.UserDAO;
 import com.chainsys.urbannestrealty.model.Property;
+import com.chainsys.urbannestrealty.model.Sales;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -53,6 +54,7 @@ public class PropertiesController
 		
 		httpSession.setAttribute("sellerId", sellerId);
 		httpSession.setAttribute("propertyName", propertyName);
+		
 		userDAO.property(property);
 		}
 		else
@@ -151,5 +153,14 @@ public class PropertiesController
 		List<Property> list = userDAO.registeredProperties();
 		model.addAttribute("list", list);
 		return "RetrivePropertiesTable.jsp";
+	}
+	
+	@RequestMapping("/CompletedDeals")
+	public String completedDeals(Model model, HttpSession session)
+	{
+		String id = (String)session.getAttribute("sellerId");
+		List<Sales> list = userDAO.completedDeals(id);
+		model.addAttribute("list", list);
+		return "PaidTable.jsp";
 	}
 }
