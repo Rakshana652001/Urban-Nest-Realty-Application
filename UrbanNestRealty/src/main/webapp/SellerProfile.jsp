@@ -9,7 +9,7 @@
 <title>Seller Profile</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: "Lora", serif;
         background-color: #818589;
         margin: 0;
         padding: 0;
@@ -55,24 +55,35 @@
 <div class="container">
 	<% 
     ArrayList<User> list = (ArrayList<User>)request.getAttribute("list");
-    for (User object : list) { 
-    %>
-    <div class="card">
-            	<p><strong>ID: </strong><%= object.getGeneratedUserID() %></p>
-            	<p><strong>Name: </strong><%= object.getName() %></p>
-            	<p><strong>Phone Number: </strong><%= object.getPhoneNumber() %></p>
-            	<p><strong>Email ID: </strong><%= object.getEmailID() %></p>
-            	<p><strong>Address: </strong><%= object.getAddress() %></p>
-            	<p><strong>District: </strong><%= object.getDistrict() %></p>
-            	<p><strong>State: </strong><%= object.getState() %></p>    
-            	<form action="UpdateSellerDetails.jsp">
-            	<input type="hidden" id = "name" value="<%=object.getName() %>" name = "name">
-            	<button>Update</button>
-            	</form>
-				<form action="SellerWelcomePage.jsp"><button>Back to Home</button></form>        	
-   	</div>
-	<% 
-    } 
+	if(list!=null && !list.isEmpty())
+	{
+		for (User object : list) { 
+		    %>
+		    <div class="card">
+		            	<p><strong>ID: </strong><%= object.getGeneratedUserID() %></p>
+		            	<p><strong>Name: </strong><%= object.getName() %></p>
+		            	<p><strong>Phone Number: </strong><%= object.getPhoneNumber() %></p>
+		            	<p><strong>Email ID: </strong><%= object.getEmailID() %></p>
+		            	<p><strong>Address: </strong><%= object.getAddress() %></p>
+		            	<p><strong>District: </strong><%= object.getDistrict() %></p>
+		            	<p><strong>State: </strong><%= object.getState() %></p>    
+		            	<form action="UpdateSellerDetails.jsp">
+		            	<input type="hidden" id = "name" value="<%=object.getName() %>" name = "name">
+		            	<button>Update</button>
+		            	</form>
+						<form action="SellerWelcomePage.jsp"><button>Back to Home</button></form>        	
+		   	</div>
+			<% 
+		    } 
+	}
+	else
+    {
+    	%>
+			<tr>
+				<td colspan="15">No Records found</td>
+			</tr>
+		<%
+    }
     %>
 </div>
 </body>

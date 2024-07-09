@@ -21,6 +21,22 @@ public class Property
     String customerId;
     String registeredDate;
     String purchasedDate;
+    String fromDate;
+    String toDate;
+    
+    
+	public String getFromDate() {
+		return fromDate;
+	}
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+	public String getToDate() {
+		return toDate;
+	}
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
+	}
 	public String getSellerId() {
 		return sellerId;
 	}
@@ -113,13 +129,13 @@ public class Property
 	}
 	@Override
 	public String toString() {
-		return "PropertyRegistration [sellerId=" + sellerId + ", propertyName=" + propertyName + ", propertyId="
-				+ propertyId + ", propertyPrice=" + propertyPrice + ", propertyAddress=" + propertyAddress
-				+ ", propertyDistrict=" + propertyDistrict + ", propertyState=" + propertyState + ", propertyImages="
+		return "Property [sellerId=" + sellerId + ", propertyName=" + propertyName + ", propertyId=" + propertyId
+				+ ", propertyPrice=" + propertyPrice + ", propertyAddress=" + propertyAddress + ", propertyDistrict="
+				+ propertyDistrict + ", propertyState=" + propertyState + ", propertyImages="
 				+ Arrays.toString(propertyImages) + ", propertyDocument=" + Arrays.toString(propertyDocument)
 				+ ", approval=" + approval + ", registerStatus=" + registerStatus + ", paymentStatus=" + paymentStatus
 				+ ", customerId=" + customerId + ", registeredDate=" + registeredDate + ", purchasedDate="
-				+ purchasedDate + "]";
+				+ purchasedDate + ", fromDate=" + fromDate + ", toDate=" + toDate + "]";
 	}
-	
+		
 }

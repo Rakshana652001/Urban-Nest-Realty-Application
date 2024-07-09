@@ -7,7 +7,7 @@
 <title>Successfully Registered</title>
 <style type="text/css">
 body,button {
-	font-family: Arial, sans-serif;
+	font-family: "Lora", serif;
     background-color: #818589;
     background-size: cover;
  	background-position: center;

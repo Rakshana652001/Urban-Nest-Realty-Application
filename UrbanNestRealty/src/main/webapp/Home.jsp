@@ -13,7 +13,10 @@
   box-sizing: border-box;
   font-family: "Lora", serif;
 }
-
+body
+{
+	overflow-x:hidden;
+}
 section {
     min-height: 100vh;
     display: flex;
@@ -38,7 +41,8 @@ h1, p {
 
 .nav-item {
 	position: relative;
-	right: 25px;  
+	right: 20px;
+	margin-right: 50px;
 }
  
 .nav-item.active {
@@ -52,7 +56,10 @@ h1, p {
 }
 
 .navbar-brand img {
-    height: 80px;
+    position: relative;
+	right: 1rem;
+    height: 90px;
+    width: 100px;
 }
 
 #navbarSupportedContent a{
@@ -64,20 +71,6 @@ h1, p {
 .active:hover{
   color: black !important;
   border-radius: 12px;
-}
-
-.dropdown-menu {
-    background-color: gray;
-    border: none;
-}
-
-.dropdown-item{
-     color: white;
-}
-
-.dropdown-item:hover {
-    background-color: gray;
-    border-radius: 12px;
 }
 
 .form-control {
@@ -137,7 +130,7 @@ h1, p {
 #search
 {
   	position: relative;
-	left: 27rem;
+	left: 10rem;
 }
 </style>
 </head>
@@ -146,13 +139,11 @@ h1, p {
 <nav class="navbar navbar-expand-lg navbar-dark">
  <div class="container">
      <a class="navbar-brand">
-        <img src="Images/Nest Realty.jpg" alt="Logo">
+        <img src="Images/Nest Realty.png" alt="Logo">
     </a>
-    
-    <!-- <a class="navbar-brand" href="javascript:history.back()">Back</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> -->
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">

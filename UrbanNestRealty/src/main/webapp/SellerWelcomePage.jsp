@@ -33,7 +33,9 @@ section {
 .nav-item
 {
 	position: relative;
-	right: 25px;
+	right: 6rem;
+	margin-right: 15px;
+	margin-left: 10px;
 }
 .navbar-brand
 {
@@ -41,14 +43,17 @@ section {
 	right: 40px;
 }
 .navbar-brand img {
-    height: 80px;
+     position: relative;
+	right: 2rem;
+    height: 90px;
+    width: 100px;
 }
 
 #navbarSupportedContent a{
-  font-size: 19px;
+  font-size: 16px;
 }
 #navbarSupportedContent a:hover{
-  border-bottom: 3px solid white;
+  border-bottom: 2.5px solid white;
 }
 .active:hover{
   color: black !important;
@@ -64,14 +69,19 @@ section {
     justify-content: center;
     background-attachment: fixed;
 }
+#logout
+{
+	position: relative;
+	left: 17rem;
+}
+
 </style>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark">
  <div class="container">
      <a class="navbar-brand">
-        <img src="Images/Nest Realty.jpg" alt="Logo">
+        <img src="Images/Nest Realty.png" alt="Logo">
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -90,7 +100,7 @@ section {
         <li class="nav-item">
           <a class="nav-link active" href="CompletedDeals">Completed Deals</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="logout">
           <a class="nav-link active" href="LogOut">Logout</a>
         </li>
       </ul>

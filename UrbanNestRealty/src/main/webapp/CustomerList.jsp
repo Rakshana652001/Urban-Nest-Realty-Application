@@ -9,7 +9,7 @@
 <title>Clients</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -56,6 +56,7 @@ button, .btn-action, input {
     cursor: pointer;
     flex: 1;
     margin: 5px;
+     font-family: "Lora", serif;
 }
 label{
 	color: white;

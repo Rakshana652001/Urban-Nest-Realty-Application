@@ -48,4 +48,6 @@ public interface UserDAO
 	List<Property> registeredProperties();
 	List<Sales> completedDeals(String id);
 	List<Property> purchasedProperties(String id);
+	List<Property> propertiesSearch(String propertyName);
+	List<Property> dateFromTo(String fromDate, String toDate);
 }

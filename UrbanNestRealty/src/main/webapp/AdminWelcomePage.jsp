@@ -12,7 +12,10 @@
   box-sizing: border-box;
   font-family: "Lora", serif;
 }
-
+body
+{
+	overflow-x:hidden;
+}
 section {
     min-height: 100vh;
     display: flex;
@@ -31,12 +34,35 @@ section {
   	left: 0;
 }
 
-.navbar-brand img {
-    height: 80px;
+.nav-item {
+	position: relative;
+	right: 5rem;
+	margin-right: 20px;
 }
 
+
+.dropdown-menu {
+    background-color: gray;
+    border: none;
+}
+
+.navbar-brand img {
+	position: relative;
+	right: 4rem;
+    height: 90px;
+    width: 100px;
+    
+}
+
+#logout
+{
+	position: relative;
+	left: 23rem;
+}
+
+
 #navbarSupportedContent a{
-  font-size: 19px;
+  font-size: 16px;
 }
 
 #navbarSupportedContent a:hover{
@@ -48,16 +74,17 @@ section {
 }
 
 .dropdown-menu {
-    background-color: gray;
+    background-color: #818589;
     border: none;
 }
 
 .dropdown-item{
      color: white;
-}
+     }
+
 
 .dropdown-item:hover {
-    background-color: gray;
+    background-color: #818589;
     border-radius: 12px;
 }
 
@@ -77,7 +104,7 @@ section {
 <nav class="navbar navbar-expand-lg navbar-dark">
  <div class="container">
      <a class="navbar-brand">
-        <img src="Images/Nest Realty.jpg" alt="Logo">
+        <img src="Images/Nest Realty.png" alt="Logo">
     </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -108,7 +135,7 @@ section {
         <li class="nav-item">
           <a class="nav-link active" href=ClosedDeals>Closed Deals</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="logout">
           <a class="nav-link active"  href="LogOut">Logout</a>
         </li>
       </ul>

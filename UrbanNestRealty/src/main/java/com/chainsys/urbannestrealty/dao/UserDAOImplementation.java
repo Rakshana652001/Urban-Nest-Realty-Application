@@ -343,4 +343,20 @@ public class UserDAOImplementation implements UserDAO
 		List<Property> list = jdbcTemplate.query(retrive, new PurchasedPropertiesMapper(), id);
 		return list;
 	}
+
+	@Override
+	public List<Property> propertiesSearch(String propertyName) 
+	{
+		String retrive = String.format( "select seller_id, property_name, property_images, property_price, property_address, property_district, property_state, registered_date,purchased_date,customer_id,payment_status from property_registration where (property_name like '%%%s%%') and deleted_User=0 and payment_status='Paid'",propertyName);
+		List<Property> list = jdbcTemplate.query(retrive, new ClosedPropertyMapper());
+		return list;
+	}
+
+	@Override
+	public List<Property> dateFromTo(String fromDate, String toDate) 
+	{
+		String retrive = "select seller_id, property_name, approval, property_images, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status, payment_status from property_registration where payment_status='Paid' and purchased_date>=? and purchased_date<=? and registered_date>=? and registered_date<=?";
+		List<Property> list = jdbcTemplate.query(retrive, new ClosedPropertyMapper(),fromDate,toDate,fromDate, toDate);
+		return list;
+	}
 }

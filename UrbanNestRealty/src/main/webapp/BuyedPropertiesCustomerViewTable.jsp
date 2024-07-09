@@ -10,7 +10,7 @@
 <title>Purchased Properties</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -102,30 +102,42 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Property> list = (ArrayList<Property>) request.getAttribute("list");
-        for (Property object : list) {
-           
-            byte[] documents = object.getPropertyDocument();
-            String getDocuments = Base64.getEncoder().encodeToString(documents);
-        %>
-            <tr>
-                <td><%= object.getSellerId() %></td>
-                <td><%=object.getCustomerId() %></td>
-                <td><%= object.getPropertyName() %></td>
-                <td>
-                    <img class="document-image" alt="documents" src="data:image/jpeg;base64,<%= getDocuments %> ">      
-                </td>
-                <td><%= object.getPropertyPrice() %></td>
-                <td><%= object.getPropertyAddress() %></td> 
-                <td><%= object.getPropertyDistrict() %></td>
-                <td><%=object.getRegisteredDate() %></td>
-                <td><%=object.getPurchasedDate() %></td>
-                <td><%=object.getRegisterStatus() %></td>
-                <td><%= object.getPaymentStatus() %></td>
-                <td>
-                    <button onclick="generateReceipt('<%= object.getSellerId()%>', '<%= object.getCustomerId()%>', '<%= object.getPropertyName()%>', '<%= object.getPropertyPrice() %>' ,'<%= object.getPropertyAddress()%>', '<%= object.getPropertyDistrict() %>', '<%=object.getRegisteredDate() %>', '<%=object.getPurchasedDate() %>','<%=object.getRegisterStatus() %>','<%= object.getPaymentStatus() %>')">Generate Receipt</button>
-                </td>
-            </tr>
-        <% } %>
+        if(list!=null && !list.isEmpty())
+        {
+        	 for (Property object : list) {
+                 
+                 byte[] documents = object.getPropertyDocument();
+                 String getDocuments = Base64.getEncoder().encodeToString(documents);
+             %>
+                 <tr>
+                     <td><%= object.getSellerId() %></td>
+                     <td><%=object.getCustomerId() %></td>
+                     <td><%= object.getPropertyName() %></td>
+                     <td>
+                         <img class="document-image" alt="documents" src="data:image/jpeg;base64,<%= getDocuments %> ">      
+                     </td>
+                     <td><%= object.getPropertyPrice() %></td>
+                     <td><%= object.getPropertyAddress() %></td> 
+                     <td><%= object.getPropertyDistrict() %></td>
+                     <td><%=object.getRegisteredDate() %></td>
+                     <td><%=object.getPurchasedDate() %></td>
+                     <td><%=object.getRegisterStatus() %></td>
+                     <td><%= object.getPaymentStatus() %></td>
+                     <td>
+                         <button onclick="generateReceipt('<%= object.getSellerId()%>', '<%= object.getCustomerId()%>', '<%= object.getPropertyName()%>', '<%= object.getPropertyPrice() %>' ,'<%= object.getPropertyAddress()%>', '<%= object.getPropertyDistrict() %>', '<%=object.getRegisteredDate() %>', '<%=object.getPurchasedDate() %>','<%=object.getRegisterStatus() %>','<%= object.getPaymentStatus() %>')">Download</button>
+                     </td>
+                 </tr>
+             <% } 
+        }
+        else
+        {
+        	%>
+			<tr>
+				<td colspan="15">No Records found</td>
+			</tr>
+		<%
+        }
+       %>
     </tbody>
 </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
@@ -137,7 +149,7 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
         
         doc.text("Payment Receipt", 10, 10);
         doc.text("Seller ID: " + sellerId, 10, 20);
-        doc.text("Customer ID"+ customerId, 10,30);
+        doc.text("Customer ID: "+ customerId, 10,30);
         doc.text("Property Name: " + propertyName, 10, 40);
         doc.text("Property Price: " + propertyPrice, 10, 50);
         doc.text("Property Address: "+propertyAddress, 10, 60);
@@ -146,7 +158,7 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
         doc.text("Purchased Date: " + purchasedDate, 10, 90);
         doc.text("Register Status: " + registerStatus, 10, 100);
         doc.text("Payment Status: " + payment, 10, 110);
-        doc.save("receipt_" + customerId + ".pdf");
+        doc.save("receipt_" + sellerId + ".pdf");
     }
 </script>
 </body>

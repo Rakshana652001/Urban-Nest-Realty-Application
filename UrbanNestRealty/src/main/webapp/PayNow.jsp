@@ -8,7 +8,7 @@
 <title>Pay Now</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     background-size: cover;
     background-position: center;
@@ -55,6 +55,7 @@ input[type="submit"] {
 }
 input[type="submit"]:hover {
     background-color: grey;
+     font-family: "Lora", serif;
 }
 </style>
 </head>

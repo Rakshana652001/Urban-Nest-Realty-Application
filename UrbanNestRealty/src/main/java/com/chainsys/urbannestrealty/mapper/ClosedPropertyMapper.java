@@ -21,10 +21,6 @@ Property property = new Property();
 		String propertyName = rs.getString("property_name");
 		property.setPropertyName(propertyName);
 		
-		
-		String approval = rs.getString("approval");
-		property.setApproval(approval);
-		
 		Blob image = rs.getBlob("property_images");
         if (image != null) 
         {
@@ -53,10 +49,7 @@ Property property = new Property();
         
         String customerId = rs.getString("customer_id");
         property.setCustomerId(customerId);
-        
-        String registeredStatus = rs.getString("register_status");
-        property.setRegisterStatus(registeredStatus);
-        
+                
         String paymentStatus = rs.getString("payment_status");
         property.setPaymentStatus(paymentStatus);
         

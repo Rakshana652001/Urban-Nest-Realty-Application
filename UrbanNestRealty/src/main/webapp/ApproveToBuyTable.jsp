@@ -9,7 +9,7 @@
 <title>Payment Approval</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -96,31 +96,43 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Sales> list = (ArrayList<Sales>) request.getAttribute("list");
-       	for (Sales object : list)
+        if(list!=null && !list.isEmpty())
         {
-         %>
-             <tr>
-                 <td><%= object.getCustomerId() %></td>
-                 <td><%=object.getSellerId() %></td>
-                 <td><%=object.getPropertyAddress() %></td>
-                 <td><%=object.getTotalAmount() %></td>
-               	 <td><%=object.getPayableAmount() %></td>
-                 <td><%= object.getPaymentMethod() %></td>
-                 <td><%= object.getApproval() %></td>
-                 <td>
-                      <form action="ApprovalToBuy" method="post">
-                         <input type="hidden" name="customerId" value="<%=object.getCustomerId() %>">
-                         <select name="approvalStatus">
-                             <option value="Select">Select</option>
-                             <option value="Approved">Approved</option>
-                             <option value="Rejected">Rejected</option>
-                         </select>
-                         <input type="submit" value="Submit">
-                     </form>
-                 </td>                
-              </tr>             
-         <%
-             }
+        	for (Sales object : list)
+            {
+             %>
+                 <tr>
+                     <td><%= object.getCustomerId() %></td>
+                     <td><%=object.getSellerId() %></td>
+                     <td><%=object.getPropertyAddress() %></td>
+                     <td><%=object.getTotalAmount() %></td>
+                   	 <td><%=object.getPayableAmount() %></td>
+                     <td><%= object.getPaymentMethod() %></td>
+                     <td><%= object.getApproval() %></td>
+                     <td>
+                          <form action="ApprovalToBuy" method="post">
+                             <input type="hidden" name="customerId" value="<%=object.getCustomerId() %>">
+                             <select name="approvalStatus">
+                                 <option value="Select">Select</option>
+                                 <option value="Approved">Approved</option>
+                                 <option value="Rejected">Rejected</option>
+                             </select>
+                             <input type="submit" value="Submit">
+                         </form>
+                     </td>                
+                  </tr>             
+             <%
+                 }
+        }
+        else
+        {
+        	%>
+				<tr>
+					<td colspan="15">No Records found</td>
+				</tr>
+			<%
+        }
+       	
        	%>
     </tbody>
 </table>

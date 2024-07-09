@@ -10,7 +10,7 @@
 <title>Authorized Properties</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -106,36 +106,48 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Property> list = (ArrayList<Property>) request.getAttribute("list");
-        for (Property object : list) {
-            byte[] images = object.getPropertyImages();
-            String getImage = Base64.getEncoder().encodeToString(images);
-            
-            byte[] document = object.getPropertyDocument();
-            String getdocument = Base64.getEncoder().encodeToString(document);
+        if(list!=null && !list.isEmpty())
+        {
+        	for (Property object : list) {
+                byte[] images = object.getPropertyImages();
+                String getImage = Base64.getEncoder().encodeToString(images);
+                
+                byte[] document = object.getPropertyDocument();
+                String getdocument = Base64.getEncoder().encodeToString(document);
+            %>
+                 <tr>
+                     <td><%= object.getSellerId() %></td>
+                     <td><%= object.getPropertyName() %></td>
+                     <td><%= object.getPropertyId() %></td>
+                     <td><%=object.getApproval() %></td>
+                     <td> 
+                    	<img alt="Residential" src="data:image/jpeg;base64,<%= getImage %> ">      
+                     </td>
+                     <td> 
+                    	<img alt="documents" src="data:image/jpeg;base64,<%= getdocument %> ">      
+                     </td>
+                     <td><%= object.getPropertyPrice() %></td>
+                     <td><%= object.getPropertyAddress() %></td>
+                     <td><%= object.getPropertyDistrict() %></td>
+                     <td><%=object.getPropertyState() %></td>
+                     <td><%=object.getRegisteredDate() %></td>
+                     <td><%=object.getPurchasedDate() %></td>
+                     <td><%=object.getCustomerId() %></td>
+                     <td><%=object.getRegisterStatus() %></td>
+                     <td><%=object.getPaymentStatus() %></td>
+                 </tr>
+                 
+             <% }
+        }
+        else
+        {
+        	%>
+				<tr>
+					<td colspan="15">No Records found</td>
+				</tr>
+			<%
+        }
         %>
-             <tr>
-                 <td><%= object.getSellerId() %></td>
-                 <td><%= object.getPropertyName() %></td>
-                 <td><%= object.getPropertyId() %></td>
-                 <td><%=object.getApproval() %></td>
-                 <td> 
-                	<img alt="Residential" src="data:image/jpeg;base64,<%= getImage %> ">      
-                 </td>
-                 <td> 
-                	<img alt="documents" src="data:image/jpeg;base64,<%= getdocument %> ">      
-                 </td>
-                 <td><%= object.getPropertyPrice() %></td>
-                 <td><%= object.getPropertyAddress() %></td>
-                 <td><%= object.getPropertyDistrict() %></td>
-                 <td><%=object.getPropertyState() %></td>
-                 <td><%=object.getRegisteredDate() %></td>
-                 <td><%=object.getPurchasedDate() %></td>
-                 <td><%=object.getCustomerId() %></td>
-                 <td><%=object.getRegisterStatus() %></td>
-                 <td><%=object.getPaymentStatus() %></td>
-             </tr>
-             
-         <% } %>
     </tbody>
 </table>
 </body>

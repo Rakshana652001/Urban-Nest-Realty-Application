@@ -10,7 +10,7 @@
 <title>Admin Profile</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: "Lora", serif;
         background-color: #818589;
         margin: 0;
         padding: 0;
@@ -39,7 +39,7 @@
     }
     
     button, input {
-        background-color: gray;
+        background-color: #818589;
         color: white;
         padding: 10px 20px;
         border: none;

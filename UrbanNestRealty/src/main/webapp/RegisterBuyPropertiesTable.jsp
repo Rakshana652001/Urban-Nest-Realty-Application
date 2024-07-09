@@ -9,7 +9,7 @@
 <title>Ready-to-Purchase</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -97,30 +97,38 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Sales> list = (ArrayList<Sales>) request.getAttribute("list");
-       	for (Sales object : list)
-             {
-         %>
-             <tr>
-                 <td><%= object.getCustomerId() %></td>
-                 <td><%=object.getSellerId() %></td>
-                 <td><%=object.getPropertyAddress() %></td>
-                 <td><%= object.getTotalAmount() %></td>
-                 <td><%=object.getPayableAmount() %></td>
-                 <td><%= object.getPaymentMethod() %></td>
-                 <td><%= object.getApproval() %></td>
-                 <td>
-                 <form action="PayNow.jsp" >
-                 <input type="hidden" name="amount" value="<%=object.getPayableAmount() %>">
-                 	<button>Pay Now</button>
-                 </form>
-                 </td>
-             </tr>
-         <%
-             }
-            
-   
-            %>
-     
+        if(list!=null && !list.isEmpty())
+        {
+        	for (Sales object : list)
+            {
+        %>
+            <tr>
+                <td><%= object.getCustomerId() %></td>
+                <td><%=object.getSellerId() %></td>
+                <td><%=object.getPropertyAddress() %></td>
+                <td><%= object.getTotalAmount() %></td>
+                <td><%=object.getPayableAmount() %></td>
+                <td><%= object.getPaymentMethod() %></td>
+                <td><%= object.getApproval() %></td>
+                <td>
+                <form action="PayNow.jsp" >
+                <input type="hidden" name="amount" value="<%=object.getPayableAmount() %>">
+                	<button>Pay Now</button>
+                </form>
+                </td>
+            </tr>
+        <%
+            }
+        }
+        else
+        {
+        	%>
+				<tr>
+					<td colspan="15">No Records found</td>
+				</tr>
+			<%
+        }
+       	%>
     </tbody>
 </table>
 </body>

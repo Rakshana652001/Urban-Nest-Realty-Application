@@ -10,7 +10,7 @@
 <title>Completed Deals</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -77,29 +77,6 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     justify-content: center;
 }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-<script>
-    function generateReceipt(customerId, propertyAddress, paymentMethod,totalAmount , payableAmount, customerAccount, yourAccount, purchasedDate,paymentStatus)
-    {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.text("Payment Receipt", 10, 10);
-        doc.text("Customer ID: " + customerId, 10, 20);
-       
-        doc.text("Property Address: " + propertyAddress, 10, 30);
-        doc.text("Payment Method: " + paymentMethod, 10, 40);
-        doc.text("Payable Amount: "+ payableAmount, 10, 50);
-        doc.text("Property Total Amount: " + propertyPrice, 10, 60);
-        
-        doc.text("Customer Account: "+ customerAccount, 10, 70);
-        doc.text("Your Account: "+ yourAccount, 10, 80);
-        doc.text("Purchased Date: "+ purchasedDate, 10, 90) 
-        doc.text("Payment Status: " + paymentStatus, 10, 100);
-
-        doc.save("receipt_" + customerId + ".pdf");
-    }
-</script>
 </head>
 <body>
 <%
@@ -128,32 +105,67 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Sales> list = (ArrayList<Sales>) request.getAttribute("list");
-        for (Sales object : list) {
-            byte[] images = object.getGovernmentId();
-            String getImage = Base64.getEncoder().encodeToString(images);
+        if(list!=null && !list.isEmpty())
+        {
+        	for (Sales object : list) {
+                byte[] images = object.getGovernmentId();
+                String getImage = Base64.getEncoder().encodeToString(images);
+            %>
+            <tr>
+                <td><%= object.getCustomerId() %></td>
+                <td> 
+                    <img alt="Government ID" src="data:image/jpeg;base64,<%= getImage %>">      
+                </td>
+                <td><%= object.getPropertyAddress() %></td>
+                <td><%= object.getPaymentMethod() %></td>
+                <td><%=object.getTotalAmount() %></td>
+                <td><%=object.getPayableAmount() %></td>
+                <td><%=object.getCustomerAccount() %></td>
+                <td><%=object.getSellerAccount() %></td>
+                <td><%=object.getPurchasedDate() %></td>
+                <td><%=object.getPaidStatus() %></td>
+                <td>
+                    <button onclick="generateReceipt('<%= object.getCustomerId() %>', '<%= object.getPropertyAddress() %>','<%= object.getPaymentMethod() %>','<%=object.getTotalAmount() %>','<%=object.getPayableAmount() %>','<%=object.getCustomerAccount() %>','<%=object.getSellerAccount() %>','<%=object.getPurchasedDate() %>','<%=object.getPaidStatus() %>',)">
+                    Download
+                    </button>
+                </td>
+            </tr>
+            <% } 
+        }
+        else
+        {
+        	%>
+				<tr>
+					<td colspan="15">No Records found</td>
+				</tr>
+			<%
+        }
         %>
-        <tr>
-            <td><%= object.getCustomerId() %></td>
-            <td> 
-                <img alt="Government ID" src="data:image/jpeg;base64,<%= getImage %>">      
-            </td>
-            <td><%= object.getPropertyAddress() %></td>
-            <td><%= object.getPaymentMethod() %></td>
-            <td><%=object.getTotalAmount() %></td>
-            <td><%=object.getPayableAmount() %></td>
-            <td><%=object.getCustomerAccount() %></td>
-            <td><%=object.getSellerAccount() %></td>
-            <td><%=object.getPurchasedDate() %></td>
-            <td><%=object.getPaidStatus() %></td>
-            <td>
-                <button onclick="generateReceipt('<%= object.getCustomerId() %>','<%=object.getPropertyAddress() %>','<%= object.getPaymentMethod() %>','<%= object.getTotalAmount() %>', 
-                    '<%= object.getPayableAmount() %>','<%= object.getCustomerAccount() %>','<%= object.getSellerAccount() %>', '<%=object.getPurchasedDate() %>', '<%=object.getPaidStatus() %>')">
-                Generate Receipt
-                </button>
-            </td>
-        </tr>
-        <% } %>
     </tbody>
 </table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script type="text/javascript">
+    function generateReceipt(customerId, propertyAddress, paymentMethod,totalAmount , payableAmount, customerAccount, yourAccount, purchasedDate,paymentStatus)
+    {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.line(20, 20, 20, 20);
+
+        doc.text("Payment Receipt", 10, 10);
+        doc.text("Customer ID: " + customerId, 10, 20);
+        
+        doc.text("Property Address: " + propertyAddress, 10, 30);
+        doc.text("Payment Method: " + paymentMethod, 10, 40);
+        doc.text("Property Total Amount: " + totalAmount, 10, 50);
+        doc.text("Payable Amount: "+ payableAmount, 10, 60);
+        
+        doc.text("Customer Account: "+ customerAccount, 10, 70);
+        doc.text("Your Account: "+ yourAccount, 10, 80);
+        doc.text("Purchased Date: "+ purchasedDate, 10, 90) 
+        doc.text("Payment Status: " + paymentStatus, 10, 100);
+		
+        doc.save("receipt_" + customerId + ".pdf");
+    }
+</script>
 </body>
 </html>

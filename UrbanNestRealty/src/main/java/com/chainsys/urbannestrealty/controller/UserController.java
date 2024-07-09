@@ -245,6 +245,14 @@ public class UserController
 		return "PropertyTableForUserDisplay.jsp";
 	}
 	
+	@RequestMapping("/PropertySearch")
+	public String propertySearch(Model model, @RequestParam("propertyName") String propertyName)
+	{
+		List<Property> list = userDAO.propertiesSearch(propertyName);
+		model.addAttribute("list",list);
+		return "RetrivePropertiesTable.jsp";
+	}
+	
 	@RequestMapping("/LogOut")
 	public String logOut(HttpSession session)
 	{

@@ -8,9 +8,9 @@
 <meta charset="ISO-8859-1">
 <title>Customer Profile</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: grey;
+   body {
+        font-family: "Lora", serif;
+        background-color: #818589;
         margin: 0;
         padding: 0;
     }
@@ -38,7 +38,7 @@
     }
     
      button, input {
-        background-color: black;
+        background-color: #818589;
         color: white;
         padding: 10px 20px;
         border: none;

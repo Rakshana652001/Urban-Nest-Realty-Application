@@ -7,7 +7,7 @@
 <title>Login</title>
 <style type="text/css">
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     background-size: cover;
     background-position: center;

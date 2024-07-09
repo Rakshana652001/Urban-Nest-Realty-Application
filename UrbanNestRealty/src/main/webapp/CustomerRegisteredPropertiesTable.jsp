@@ -9,7 +9,7 @@
 <title>Properties Under Review</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -98,29 +98,39 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     <tbody>
         <% 
         ArrayList<Sales> list = (ArrayList<Sales>) request.getAttribute("list");
-       	for (Sales object : list)
-             {
-                 byte[] images = object.getGovernmentId();
-                 String getImage;
-                 getImage = Base64.getEncoder().encodeToString(images);  
-         %>
-             <tr>
-                 <td><%= object.getCustomerId() %></td>
-                 <td><%=object.getSellerId() %></td>
-                 <td> 
-                	<img alt="House" src="data:image/jpeg;base64,<%= getImage %> ">      
-                 </td>
-                 <td><%=object.getPropertyAddress() %></td>
-                 <td><%= object.getTotalAmount() %></td>
-                 <td><%=object.getPayableAmount() %></td>
-                 <td><%= object.getPaymentMethod() %></td>
-                 <td><%= object.getApproval() %></td>
-                 <td><%=object.getPaidStatus() %></td>
-             </tr>             
-         <%
-             }
-
-            %>
+        if(list!=null && !list.isEmpty())
+        {
+        	for (Sales object : list)
+            {
+                byte[] images = object.getGovernmentId();
+                String getImage;
+                getImage = Base64.getEncoder().encodeToString(images);  
+        %>
+            <tr>
+                <td><%= object.getCustomerId() %></td>
+                <td><%=object.getSellerId() %></td>
+                <td> 
+               	<img alt="House" src="data:image/jpeg;base64,<%= getImage %> ">      
+                </td>
+                <td><%=object.getPropertyAddress() %></td>
+                <td><%= object.getTotalAmount() %></td>
+                <td><%=object.getPayableAmount() %></td>
+                <td><%= object.getPaymentMethod() %></td>
+                <td><%= object.getApproval() %></td>
+                <td><%=object.getPaidStatus() %></td>
+            </tr>             
+        <%
+            }
+        }
+        else
+        {
+        	%>
+				<tr>
+					<td colspan="15">No Records found</td>
+				</tr>
+			<%
+        }
+       	%>
      
     </tbody>
 </table>

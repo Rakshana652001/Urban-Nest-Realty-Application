@@ -26,7 +26,6 @@ public class PropertiesController
 	@Autowired 
 	UserDAO userDAO;
 	
-	
 	@PostMapping("/PropertyRegistration")
 	public String saveUserDetails(@RequestParam("sellerId") String sellerId ,@RequestParam ("propertyName") String propertyName ,@RequestParam("propertyId") String propertyId ,@RequestParam ("registeredDate") String registeredDate, @RequestParam ("propertyPrice") long propertyPrice, @RequestParam ("propertyImages") MultipartFile propertyImages, @RequestParam("propertyDocument") MultipartFile propertyDocument, @RequestParam("propertyAddress") String propertyAddress, @RequestParam("propertyDistrict") String propertyDistrict, @RequestParam("propertyState") String propertyState, HttpSession httpSession) throws IOException
 	{
@@ -162,5 +161,13 @@ public class PropertiesController
 		List<Sales> list = userDAO.completedDeals(id);
 		model.addAttribute("list", list);
 		return "PaidTable.jsp";
+	}
+	
+	@RequestMapping("/Date")
+	public String date(Model model, @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate)
+	{
+		List<Property> list = userDAO.dateFromTo(fromDate,toDate);
+		model.addAttribute("list", list);
+		return "RetrivePropertiesTable.jsp";
 	}
 }

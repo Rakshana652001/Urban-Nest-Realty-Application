@@ -9,7 +9,7 @@
 <title>Unapproved Properties</title>
 <style>
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lora", serif;
     background-color: #818589;
     margin: 0;
     padding: 20px;
@@ -63,12 +63,14 @@ button, .btn-action, input[type="submit"] {
     border-radius: 4px;
     background-color: #818589;
     color: white;
+     font-family: "Lora", serif;
     cursor: pointer;
     margin: 5px;
 }
 
 button:hover, .btn-action:hover, input[type="submit"]:hover {
     background-color: #333;
+     font-family: "Lora", serif;
 }
 
 .actions {
@@ -105,47 +107,58 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
         <tbody>
             <% 
             ArrayList<Property> list = (ArrayList<Property>) request.getAttribute("list");
-            for (Property object : list) {
-                byte[] images = object.getPropertyImages();
-                String getImage = Base64.getEncoder().encodeToString(images);
-                
-                byte[] document = object.getPropertyDocument();
-                String getdocument = Base64.getEncoder().encodeToString(document);
-            %>
-                <tr>
-                    <td><%= object.getSellerId() %></td>
-                    <td><%= object.getPropertyName() %></td>
-                    <td><%= object.getPropertyId() %></td>
-                    <td><%=object.getApproval() %>
+            if(list!=null && !list.isEmpty())
+            {
+            	for (Property object : list) {
+                    byte[] images = object.getPropertyImages();
+                    String getImage = Base64.getEncoder().encodeToString(images);
                     
-                        <form action="Approval" method="post">
-                            <input type="hidden" name="address" value="<%= object.getPropertyAddress() %>">
-                            <select name="approvalStatus">
-                                <option value="Select">Select</option>
-                                <option value="Approved">Approved</option>
-                                <option value="Rejected">Rejected</option>
-                            </select>
-                            <input type="submit" value="Submit">
-                        </form>
-                    </td>
-                   <td>
-                        <img alt="Land" src="data:image/jpeg;base64,<%= getImage %> ">      
-                    </td>
-                    <td>
-                        <img alt="document" src="data:image/jpeg;base64,<%= getdocument %>">
-                    </td>
-                    <td><%= object.getPropertyPrice() %></td>
-                    <td><%= object.getPropertyAddress() %></td>
-                    <td><%= object.getPropertyDistrict() %></td>
-                    <td><%=object.getPropertyState() %></td>
-                    <td><%=object.getRegisteredDate() %></td>
-                    <td><%=object.getPurchasedDate() %></td>
-                    <td><%=object.getCustomerId() %></td>
-                    <td><%=object.getRegisterStatus() %></td>
-                    <td><%=object.getPaymentStatus() %></td>                   
-                </tr>
-            <% 
-            } 
+                    byte[] document = object.getPropertyDocument();
+                    String getdocument = Base64.getEncoder().encodeToString(document);
+                %>
+                    <tr>
+                        <td><%= object.getSellerId() %></td>
+                        <td><%= object.getPropertyName() %></td>
+                        <td><%= object.getPropertyId() %></td>
+                        <td><%=object.getApproval() %>
+                        
+                            <form action="Approval" method="post">
+                                <input type="hidden" name="address" value="<%= object.getPropertyAddress() %>">
+                                <select name="approvalStatus">
+                                    <option value="Select">Select</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
+                                <input type="submit" value="Submit">
+                            </form>
+                        </td>
+                       <td>
+                            <img alt="Land" src="data:image/jpeg;base64,<%= getImage %> ">      
+                        </td>
+                        <td>
+                            <img alt="document" src="data:image/jpeg;base64,<%= getdocument %>">
+                        </td>
+                        <td><%= object.getPropertyPrice() %></td>
+                        <td><%= object.getPropertyAddress() %></td>
+                        <td><%= object.getPropertyDistrict() %></td>
+                        <td><%=object.getPropertyState() %></td>
+                        <td><%=object.getRegisteredDate() %></td>
+                        <td><%=object.getPurchasedDate() %></td>
+                        <td><%=object.getCustomerId() %></td>
+                        <td><%=object.getRegisterStatus() %></td>
+                        <td><%=object.getPaymentStatus() %></td>                   
+                    </tr>
+                <% 
+                }
+            }
+            else
+            {
+            	%>
+    				<tr>
+    					<td colspan="15">No Records found</td>
+    				</tr>
+    			<%
+            }
             %>
         </tbody>
     </table>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 body,button {
-	font-family: Arial, sans-serif;
+	font-family: "Lora", serif;
     background-color: grey;
     background-size: cover;
  	background-position: center;
