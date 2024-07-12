@@ -35,7 +35,7 @@ public class PropertiesController
 		Property property = new Property();
 		byte[] imagebytes = propertyImages.getBytes();
 		byte[] documetnImages = propertyDocument.getBytes();
-		
+		        
 		property.setSellerId(sellerId);
 		property.setPropertyName(propertyName);
 		property.setPropertyId(propertyId);
@@ -53,7 +53,7 @@ public class PropertiesController
 		
 		httpSession.setAttribute("sellerId", sellerId);
 		httpSession.setAttribute("propertyName", propertyName);
-		
+		httpSession.setAttribute("propImage", imagebytes);
 		userDAO.property(property);
 		}
 		else
@@ -169,5 +169,32 @@ public class PropertiesController
 		List<Property> list = userDAO.dateFromTo(fromDate,toDate);
 		model.addAttribute("list", list);
 		return "RetrivePropertiesTable.jsp";
+	}
+	
+	@RequestMapping("/View")
+	public String view(HttpSession session, Model model)
+	{
+		String image = (String)session.getAttribute("propImage");
+		List<Property> list = userDAO.viewImage(image);
+		model.addAttribute("list",list);
+		return "Image.jsp";
+	}
+	
+	@RequestMapping("/SellerHistory")
+	public String sellerHistory(HttpSession session, Model model)
+	{
+		String id = (String)session.getAttribute("sellerId");
+		List<Sales> list = userDAO.sellerHistory(id);
+		model.addAttribute("list",list);
+		return "SellerHistory.jsp";
+	}
+	
+	@RequestMapping("/SellerDate")
+	public String sellerDate(HttpSession session, Model model,  @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate)
+	{
+		String id = (String)session.getAttribute("sellerId");
+		List<Sales> list = userDAO.sellerDate(id, fromDate, toDate);
+		model.addAttribute("list",list);
+		return "SellerHistory.jsp";
 	}
 }

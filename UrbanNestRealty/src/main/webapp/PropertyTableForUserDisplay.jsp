@@ -7,6 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Property Details</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style>
     body {
         font-family: "Lora", serif;
@@ -112,11 +113,21 @@
                 <p><strong>Property ID:</strong> <%= object.getPropertyId() %></p>
                 <p><strong>Approval Status: </strong><%=object.getApproval() %></p>
                 <p>
-                <% if (!getImage.isEmpty()) { %>
-                    <img alt="img" src="data:image/jpg;base64,<%= getImage %> ">
-                <% } else { %>
-                    No Image
-                <% } %>
+                
+                <% if (!getImage.isEmpty()) 
+                { 
+                	%>
+                    	<img alt="img" src="data:image/jpg;base64,<%= getImage %> ">
+                	<%
+                } 
+                else 
+                { 
+                	%>
+                    	No Image
+                	<% 
+                } 
+                %>
+               
                 </p>
                 <p><strong>Property Price:</strong> <%= object.getPropertyPrice() %></p>
                 <p><strong>Property Address:</strong> <%= object.getPropertyAddress() %></p>

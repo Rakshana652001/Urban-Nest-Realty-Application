@@ -46,6 +46,7 @@ public class CustomerController
 			sale.setApproval("Not Approved");
 			sale.setPaidStatus("Not Paid");		
 			
+			httpSession.setAttribute("propertyAddress", propertyAddress);
 			userDAO.sale(sale);
 			userDAO.updateCustomerId(customerId, propertyAddress);
 		}
@@ -79,6 +80,7 @@ public class CustomerController
 	public String approvalToBuy(@RequestParam("customerId") String customerId, @RequestParam("approvalStatus") String approvalStatus, Model model)
 	{
 		userDAO.updateApproval(customerId, approvalStatus);
+		
 		List<Sales> list = userDAO.approveToBuy();
 		model.addAttribute("list", list);
 		return "ApproveToBuyTable.jsp";
@@ -96,10 +98,10 @@ public class CustomerController
 	@RequestMapping("/PayNow")
 	public String payNow(Model model,@RequestParam("yourAccountNumber") long yourAccountNumber, @RequestParam("senderAccountNumber") long senderAccountNumber, @RequestParam("amount") Double amount, @RequestParam("purchasedDate") String purchasedDate, HttpSession session)
 	{
-		String id = (String)session.getAttribute("customerId");
+		String address = (String)session.getAttribute("propertyAddress");
 		if(Boolean.FALSE.equals(validation.accountNumber(yourAccountNumber, senderAccountNumber,model)))
 		{
-			userDAO.updatePayment(id, yourAccountNumber, senderAccountNumber, purchasedDate);
+			userDAO.updatePayment(address, yourAccountNumber, senderAccountNumber, purchasedDate);
 			return "CustomerWelcomePage.jsp";
 		}
 		else
@@ -116,6 +118,24 @@ public class CustomerController
 		List<Property> list = userDAO.purchasedProperties(id);
 		model.addAttribute("list", list);
 		return "BuyedPropertiesCustomerViewTable.jsp";
+	}
+	
+	@RequestMapping("/CustomerHistory")
+	public String history(Model model, HttpSession session)
+	{
+		String id = (String)session.getAttribute("customerId");
+		List<Sales> list = userDAO.customerTransactionHistory(id);
+		model.addAttribute("list",list);
+		return "CustomerTransactionHistory.jsp";
+	}
+	
+	@RequestMapping("/customerDate")
+	public String customerDate(HttpSession session, Model model,  @RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate)
+	{
+		String id = (String)session.getAttribute("customerId");
+		List<Sales> list = userDAO.customerDate(id, fromDate, toDate);
+		model.addAttribute("list",list);
+		return "CustomerTransactionHistory.jsp";
 	}
 
 }

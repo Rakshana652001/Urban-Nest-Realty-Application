@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style type="text/css">
 body {
     font-family: "Lora", serif;

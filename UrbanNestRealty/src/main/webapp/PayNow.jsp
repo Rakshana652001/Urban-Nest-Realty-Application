@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Pay Now</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style>
 body {
     font-family: "Lora", serif;
@@ -76,7 +77,7 @@ input[type="submit"]:hover {
         <input type="number" id="amount" name="amount" value="<%= request.getParameter("amount") %>" readonly/>
         
         <label for="purchasedDate">Purchased Date</label>
-        <input type="date" id="purchasedDate" name="purchasedDate" value="<%=purchasedDate %>" readonly>
+        <input type="date" id="purchasedDate" name="purchasedDate" value="<%=purchasedDate %>" >
         
         <input type="submit" value="Send Money">
     </form>

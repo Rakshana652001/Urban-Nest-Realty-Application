@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Buy Now</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style>
     body{
     font-family: "Lora", serif;

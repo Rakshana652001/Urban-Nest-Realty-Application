@@ -1,19 +1,19 @@
 package com.chainsys.urbannestrealty.dao;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.chainsys.urbannestrealty.mapper.ApproveSalesMapper;
 import com.chainsys.urbannestrealty.mapper.ClosedPropertyMapper;
 import com.chainsys.urbannestrealty.mapper.CompletedDealsMapper;
+import com.chainsys.urbannestrealty.mapper.CustomerHistoryMapper;
+import com.chainsys.urbannestrealty.mapper.ImageMapper;
 import com.chainsys.urbannestrealty.mapper.PropertyMapper;
 import com.chainsys.urbannestrealty.mapper.PropertyUserDisplayMapper;
 import com.chainsys.urbannestrealty.mapper.PurchasedPropertiesMapper;
 import com.chainsys.urbannestrealty.mapper.ReadyToBuyMapper;
 import com.chainsys.urbannestrealty.mapper.SalesMapper;
+import com.chainsys.urbannestrealty.mapper.SellerHistoryMapper;
 import com.chainsys.urbannestrealty.mapper.UserMapper;
 import com.chainsys.urbannestrealty.model.Property;
 import com.chainsys.urbannestrealty.model.Sales;
@@ -22,7 +22,6 @@ import com.chainsys.urbannestrealty.model.User;
 @Repository
 public class UserDAOImplementation implements UserDAO
 {
-
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	UserMapper mapper;
@@ -30,6 +29,9 @@ public class UserDAOImplementation implements UserDAO
 	ApproveSalesMapper approveSalesMapper;
 	CompletedDealsMapper completedDealsMapper;
 	PurchasedPropertiesMapper purchasedPropertiesMapper;
+	ImageMapper image;
+	CustomerHistoryMapper customerHistory;
+	SellerHistoryMapper sellerHistoryMapper;
 	
 	@Override
 	public void saveUserDetails(User user)
@@ -254,7 +256,7 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public List<Sales> propertiesUnderReview(String id)
 	{
-		String retrive = "select customer_id,seller_id, government_id, approval, property_address, payment_method, total_amount, payabel_amount, payed_status from sales_record where customer_id=? and payed_status='Not Paid'";
+		String retrive = "select customer_id,seller_id, government_id, approval, property_address, payment_method, total_amount, payabel_amount, payed_status from sales_record where customer_id=? and payed_status='Not Paid' and approval='Not Approved'";
 		List<Sales> list = jdbcTemplate.query(retrive, new SalesMapper(), id);
 		return list;
 	}
@@ -287,7 +289,7 @@ public class UserDAOImplementation implements UserDAO
 	@Override
 	public List<Sales> approveToBuy()
 	{
-		String retrive = "select customer_id, seller_id, property_address, payment_method, total_amount, payabel_amount, approval from sales_record where approval='Not Approved' and deleted_User=0";
+		String retrive = "select customer_id, seller_id, property_address, payment_method, total_amount, payabel_amount, approval, government_id from sales_record where approval='Not Approved' and deleted_User=0";
 		List<Sales> list = jdbcTemplate.query(retrive, new ApproveSalesMapper());
 		return list;
 	}
@@ -309,14 +311,14 @@ public class UserDAOImplementation implements UserDAO
 	}
 
 	@Override
-	public void updatePayment(String id, long yourAccountNumber, long senderAccountNumber,
+	public void updatePayment(String address, long yourAccountNumber, long senderAccountNumber,
 			String purchasedDate) {
-		String update= "update sales_record set customer_account=?, seller_account=?, purchased_date=?, payed_status=? where customer_id=?";
-		Object[] params = {yourAccountNumber, senderAccountNumber, purchasedDate, "Paid",id};
+		String update= "update sales_record set customer_account=?, seller_account=?, purchased_date=?, payed_status=? where property_address=?";
+		Object[] params = {yourAccountNumber, senderAccountNumber, purchasedDate, "Paid",address};
 		jdbcTemplate.update(update,params);
 		
-		String updatePropertyTable = "update property_registration set purchased_date=?, payment_status=? where customer_id=?";
-		Object[] params1 = {purchasedDate, "Paid", id};
+		String updatePropertyTable = "update property_registration set purchased_date=?, payment_status=? where property_address=?";
+		Object[] params1 = {purchasedDate, "Paid", address};
 		jdbcTemplate.update(updatePropertyTable, params1);
 	}
 
@@ -357,6 +359,47 @@ public class UserDAOImplementation implements UserDAO
 	{
 		String retrive = "select seller_id, property_name, approval, property_images, property_price, property_address, property_district, property_state, registered_date, purchased_date, customer_id, register_status, payment_status from property_registration where payment_status='Paid' and purchased_date>=? and purchased_date<=? and registered_date>=? and registered_date<=?";
 		List<Property> list = jdbcTemplate.query(retrive, new ClosedPropertyMapper(),fromDate,toDate,fromDate, toDate);
+		return list;
+	}
+
+
+	@Override
+	public List<Property> viewImage(String image) 
+	{
+		String retrive = "select property_images from property_registration where property_images=?";
+		List<Property> list = jdbcTemplate.query(retrive, new ImageMapper(), image);
+		return list;
+	}
+
+	@Override
+	public List<Sales> customerTransactionHistory(String id)
+	{
+		String history = "select seller_id, customer_account, seller_account, payabel_amount, purchased_date from sales_record where customer_id=?";
+		List<Sales> list = jdbcTemplate.query(history, new CustomerHistoryMapper(), id);
+		return list;
+	}
+
+	@Override
+	public List<Sales> sellerHistory(String id) 
+	{
+		String history = "select customer_id, customer_account, seller_account, payabel_amount, purchased_date from sales_record where seller_id=?";
+		List<Sales> list = jdbcTemplate.query(history, new SellerHistoryMapper(), id);
+		return list;
+	}
+
+	@Override
+	public List<Sales> sellerDate(String id,String fromDate, String toDate) 
+	{
+		String history = "select customer_id, customer_account, seller_account, payabel_amount, purchased_date from sales_record where seller_id=? and purchased_date>=? and purchased_date<=?";
+		List<Sales> list = jdbcTemplate.query(history, new SellerHistoryMapper(), id, fromDate, toDate);
+		return list;
+	}
+
+	@Override
+	public List<Sales> customerDate(String id, String fromDate, String toDate) 
+	{
+		String history = "select seller_id, customer_account, seller_account, payabel_amount, purchased_date from sales_record where customer_id=? and purchased_date>=? and purchased_date<=?";
+		List<Sales> list = jdbcTemplate.query(history, new CustomerHistoryMapper(), id, fromDate,toDate);
 		return list;
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="java.util.Base64"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.chainsys.urbannestrealty.model.Sales" %>
@@ -6,9 +7,8 @@
 <html lang="xml:lang">
 <head>
 <meta charset="ISO-8859-1">
-<title>Ready-to-Purchase</title>
+<title>Transaction History</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
 <link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style>
 body {
@@ -78,6 +78,18 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     gap: 10px;
     justify-content: center;
 }
+.fromDate
+{
+	position: relative;
+	left: 16rem;
+	color: white;
+}
+.back
+{
+	position: relative;
+	right: 28rem;
+	top: 45px;
+}
 .navbar {
     background-color: #818589;
     width: 100%;
@@ -123,10 +135,12 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 	position: relative;
 	left: 12rem;
 }
-
 </style>
 </head>
 <body>
+<%
+LocalDate date = LocalDate.now();
+%>
 <nav class="navbar navbar-expand-lg navbar-dark">
  <div class="container">
      <a class="navbar-brand">
@@ -156,17 +170,20 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     </div>
   </div>
 </nav>
+<a href="javascript:history.back()"><button class="back">Back</button></a>
+<form action="customerDate" class="fromDate">
+<label>From Date: <input type="date" name="fromDate" id="fromDate" min="2013-01-01" max=<%=date %> ></label>
+<label>To Date: <input type="date" name="toDate" id="toDate" value=<%=date%>></label>
+<button>Submit</button>
+</form>
 <table border="1">
     <thead>
         <tr>
-            <th>Customer ID</th>
+            <th>Your Account Number</th>
+            <th>Sender Account Number</th>
             <th>Seller ID</th>
-            <th>Property address</th>
-            <th>Property Total Amount</th>
-            <th>Payable Amount</th>
-            <th>Payment Method</th>
-            <th>Approval Status</th>
-            <th>Payment</th>
+            <th>Transaction Date</th>
+            <th>Amount</th>
         </tr>
     </thead>
     <tbody>
@@ -176,22 +193,14 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
         {
         	for (Sales object : list)
             {
-        %>
+                %>
             <tr>
-                <td><%= object.getCustomerId() %></td>
+                <td><%= object.getCustomerAccount()%></td>
+                <td><%=object.getSellerAccount() %></td>
                 <td><%=object.getSellerId() %></td>
-                <td><%=object.getPropertyAddress() %></td>
-                <td><%= object.getTotalAmount() %></td>
+                <td><%=object.getPurchasedDate() %></td>
                 <td><%=object.getPayableAmount() %></td>
-                <td><%= object.getPaymentMethod() %></td>
-                <td><%= object.getApproval() %></td>
-                <td>
-                <form action="PayNow.jsp" >
-                <input type="hidden" name="amount" value="<%=object.getPayableAmount() %>">
-                	<button>Pay Now</button>
-                </form>
-                </td>
-            </tr>
+            </tr>             
         <%
             }
         }
@@ -204,6 +213,7 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 			<%
         }
        	%>
+     
     </tbody>
 </table>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

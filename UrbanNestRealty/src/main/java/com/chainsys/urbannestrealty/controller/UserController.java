@@ -3,6 +3,7 @@ package com.chainsys.urbannestrealty.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,12 +37,15 @@ public class UserController
 	{
 		User user = new User();
 		
+		BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+        String encryptedPassword=bcrypt.encode(password);
+		
 		user.setGeneratedUserID(generatedUserID);
 		user.setName(name);		
 		user.setPhoneNumber(phoneNumber);
 		user.setDesignation(designation);
 		user.setEmailID(emailID);
-		user.setPassword(password);
+		user.setPassword(encryptedPassword);
 		user.setDistrict(district);
 		user.setState(state);
 		user.setAddress(address);
@@ -65,7 +69,7 @@ public class UserController
 		
 		try
 		{
-			if(generatedUserID.equals("UNR_Admin_1")&&password.equals(userDAO.getAdminpassword(generatedUserID)) || Boolean.FALSE.equals(validation.passwordValidation(password,model)))
+			if(generatedUserID.equals("UNR_Admin_1")&& password.equals(userDAO.getAdminpassword(generatedUserID)) || Boolean.FALSE.equals(validation.passwordValidation(password,model)))
 			{
 				httpSession.setAttribute("UNR_Admin_1", generatedUserID);
 				return "AdminWelcomePage.jsp";
@@ -128,8 +132,11 @@ public class UserController
 	{
 		User user = new User();
 		
+		BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+        String encryptedPassword=bcrypt.encode(password);
+        
 		user.setPhoneNumber(phoneNumber);
-		user.setPassword(password);
+		user.setPassword(encryptedPassword);
 		user.setAddress(address);
 		user.setName(name);
 		
@@ -146,8 +153,11 @@ public class UserController
 	{
 		User user = new User();
 		
+		BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+        String encryptedPassword=bcrypt.encode(password);
+		
 		user.setPhoneNumber(phoneNumber);
-		user.setPassword(password);
+		user.setPassword(encryptedPassword);
 		user.setAddress(address);
 		user.setName(name);
 		
@@ -164,8 +174,11 @@ public class UserController
 	{
 		User user = new User();
 		
+		BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+        String encryptedPassword=bcrypt.encode(password);
+		
 		user.setPhoneNumber(phoneNumber);
-		user.setPassword(password);
+		user.setPassword(encryptedPassword);
 		user.setAddress(address);
 		user.setName(name);
 		userDAO.updateSellerdetails(user);

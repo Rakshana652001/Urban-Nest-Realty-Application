@@ -8,6 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Completed Deals</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style>
 body {
     font-family: "Lora", serif;
@@ -76,6 +77,18 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     gap: 10px;
     justify-content: center;
 }
+.back
+{
+	position: relative;
+	right: 26rem;
+	top: 35px;
+}
+.history
+{
+	position: relative;
+	left: 25rem;
+	bottom: 10px;
+}
 </style>
 </head>
 <body>
@@ -83,7 +96,8 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 	String id = (String)session.getAttribute("sellerId");
 %>
 <h3>Completed Deals</h3>
-<a href="SellerWelcomePage.jsp"><button>Back to home</button></a>
+<a href="SellerWelcomePage.jsp"><button class="back">Back to home</button></a>
+<a href="SellerHistory"><button class="history">Transaction History</button></a>
 
 <table border="1">
     <thead>
@@ -94,9 +108,6 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
             <th>Payment Method</th>
             <th>Property Total Amount</th>
             <th>Payable Amount</th>
-            <th>Customer Account</th>
-            <th>Seller Account</th>
-            <th>Purchased Date</th>
             <th>Paid Status</th>
             <th>Download Receipt</th>
 
@@ -120,12 +131,9 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
                 <td><%= object.getPaymentMethod() %></td>
                 <td><%=object.getTotalAmount() %></td>
                 <td><%=object.getPayableAmount() %></td>
-                <td><%=object.getCustomerAccount() %></td>
-                <td><%=object.getSellerAccount() %></td>
-                <td><%=object.getPurchasedDate() %></td>
                 <td><%=object.getPaidStatus() %></td>
                 <td>
-                    <button onclick="generateReceipt('<%= object.getCustomerId() %>', '<%= object.getPropertyAddress() %>','<%= object.getPaymentMethod() %>','<%=object.getTotalAmount() %>','<%=object.getPayableAmount() %>','<%=object.getCustomerAccount() %>','<%=object.getSellerAccount() %>','<%=object.getPurchasedDate() %>','<%=object.getPaidStatus() %>',)">
+                    <button onclick="generateReceipt('<%= object.getCustomerId() %>', '<%= object.getPropertyAddress() %>','<%= object.getPaymentMethod() %>','<%=object.getTotalAmount() %>','<%=object.getPayableAmount() %>','<%=object.getCustomerAccount() %>','<%=object.getSellerAccount() %>','<%=object.getPurchasedDate() %>','<%=object.getPaidStatus() %>','<%= getImage %>')">
                     Download
                     </button>
                 </td>
@@ -145,24 +153,33 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 <script type="text/javascript">
-    function generateReceipt(customerId, propertyAddress, paymentMethod,totalAmount , payableAmount, customerAccount, yourAccount, purchasedDate,paymentStatus)
+    function generateReceipt(customerId, propertyAddress, paymentMethod,totalAmount , payableAmount, customerAccount, yourAccount, purchasedDate,paymentStatus, govId)
     {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        doc.line(20, 20, 20, 20);
-
-        doc.text("Payment Receipt", 10, 10);
-        doc.text("Customer ID: " + customerId, 10, 20);
+        doc.setFontSize(12);
+        doc.line(9, 10, 200, 10); //topline
+        doc.line(9, 285, 200, 285); //bottomline (200 length, 9 left length, (285, 285) bringing down the line with same line---)
         
-        doc.text("Property Address: " + propertyAddress, 10, 30);
-        doc.text("Payment Method: " + paymentMethod, 10, 40);
-        doc.text("Property Total Amount: " + totalAmount, 10, 50);
-        doc.text("Payable Amount: "+ payableAmount, 10, 60);
+        doc.line(200, 10, 200, 285); //rightline 
+        doc.line(9, 10, 9, 285);//leftline
         
-        doc.text("Customer Account: "+ customerAccount, 10, 70);
-        doc.text("Your Account: "+ yourAccount, 10, 80);
-        doc.text("Purchased Date: "+ purchasedDate, 10, 90) 
-        doc.text("Payment Status: " + paymentStatus, 10, 100);
+        doc.text("Payment Receipt", 20, 20);
+        doc.line(20, 23, 54, 23);
+        doc.setLineWidth(3); 
+        doc.text("Customer ID: " + customerId, 20, 30);
+        
+        doc.text("Property Address: " + propertyAddress, 20, 40);
+        doc.text("Payment Method: " + paymentMethod, 20, 50);
+        doc.text("Property Total Amount: " + totalAmount, 20, 60);
+        doc.text("Payable Amount: "+ payableAmount, 20, 70);
+        
+        doc.text("Customer Account: "+ customerAccount, 20, 80);
+        doc.text("Your Account: "+ yourAccount, 20, 90);
+        doc.text("Purchased Date: "+ purchasedDate, 20, 100) 
+        doc.text("Payment Status: " + paymentStatus, 20, 110);
+        
+        doc.addImage(govId, 'JPEG', 20, 120, 70, 50);
 		
         doc.save("receipt_" + customerId + ".pdf");
     }

@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Urban Nest Realty</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
@@ -118,6 +119,8 @@ h1, p {
     justify-content: center;
     align-items: center;
     margin: 15px;
+    position: relative;
+    top: 50px;
 }
 
 #contact h2 {
@@ -131,6 +134,19 @@ h1, p {
 {
   	position: relative;
 	left: 10rem;
+}
+div.scroll-container {
+  background-color: #333;
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  position:relative;
+  top: 30px;
+}
+
+div.scroll-container img {
+  padding: 5px;
 }
 </style>
 </head>
@@ -172,6 +188,21 @@ h1, p {
     
 </section>
 <section id="realties" class="container mt-5">
+<div class="scroll-container">
+              <img src="Images/image5.jpg" width="300" height="300">
+              <img src="Images/image2.jpg" width="300" height="300">
+              <img src="Images/image10.avif" width="300" height="300">
+              <img src="Images/image9.webp" width="300" height="300">
+              <img src="Images/image4.jpg" width="300" height="300">
+              <img src="Images/image1.jpg" width="300" height="300">
+              <img src="Images/image3.jpg" width="300" height="300">
+              <img src="Images/image7.webp" width="300" height="300">
+              <img src="Images/image8.avif" width="300" height="300">
+              <img src="Images/image6.jpg" width="300" height="300">
+              <img src="Images/images11.jpg" width="300" height="300">
+              <img src="Images/Land.jpg" width="300" height="300">
+
+            </div>
     <div class="row justify-content-around">
         <div class="col-lg-3 col-md-4 col-12 mb-4">
             <div class="card">
@@ -263,5 +294,7 @@ document.addEventListener('DOMContentLoaded',
 	        });
 	    });
 </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

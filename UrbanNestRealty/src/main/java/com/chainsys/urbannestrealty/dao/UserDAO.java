@@ -50,4 +50,9 @@ public interface UserDAO
 	List<Property> purchasedProperties(String id);
 	List<Property> propertiesSearch(String propertyName);
 	List<Property> dateFromTo(String fromDate, String toDate);
+	List<Property> viewImage(String image);
+	List<Sales> customerTransactionHistory(String id);
+	List<Sales> sellerHistory(String id);
+	List<Sales> sellerDate(String id, String fromDate, String toDate);
+	List<Sales> customerDate(String id, String fromDate, String toDate);
 }

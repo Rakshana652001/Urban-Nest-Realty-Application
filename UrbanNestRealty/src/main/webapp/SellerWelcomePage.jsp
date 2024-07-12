@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Seller Welcome Page</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');

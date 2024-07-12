@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Admin Welcome Page</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
@@ -39,7 +40,9 @@ section {
 	right: 5rem;
 	margin-right: 20px;
 }
-
+.nav-item.active {
+	border-bottom: 2.5px solid white;
+	}
 
 .dropdown-menu {
     background-color: gray;
@@ -57,7 +60,7 @@ section {
 #logout
 {
 	position: relative;
-	left: 23rem;
+	left: 14rem;
 }
 
 
@@ -131,6 +134,9 @@ section {
             <a class="dropdown-item" href="PendingProperty">Pending</a>
             <a class="dropdown-item" href="Authorized">Authorized</a>
           </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href=ApproveToBuy>Payment Approval</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href=ClosedDeals>Closed Deals</a>

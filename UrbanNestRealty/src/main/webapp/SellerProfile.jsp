@@ -7,6 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Seller Profile</title>
+<link rel="icon" type="image/x-icon" href="Images/Nest Realty.jpg">
 <style>
     body {
         font-family: "Lora", serif;
@@ -37,17 +38,23 @@
         box-sizing: border-box;
     }
     
-     button, input {
-        background-color: #818589;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 10px;
-    }
-    
+     button, .btn-action, input {
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    background-color: #818589;
+    color: white;
+    cursor: pointer;
+    flex: 1;
+    margin: 5px;
+     font-family: "Lora", serif;
+}
+label{
+	color: white;
+}
+button:hover, .btn-action:hover {
+    background-color: #333;
+}   
 </style>
 </head>
 <body>
