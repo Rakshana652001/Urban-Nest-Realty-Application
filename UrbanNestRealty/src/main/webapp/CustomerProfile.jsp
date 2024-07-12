@@ -79,7 +79,25 @@ button:hover, .btn-action:hover {
 	position: relative;
 	right: 40px;
 }
+.dropdown-menu {
+    background-color: #818589;
+    border: none;
+}
 
+.dropdown-item{
+     color: white;
+     }
+
+
+.dropdown-item:hover {
+    background-color: #818589;
+    border-radius: 12px;
+}
+.dropdown:hover .dropdown-menu {
+
+   display: block;
+   margin-top: 0;
+}
 .navbar-brand img {
     position: relative;
 	right: 2rem;
@@ -87,7 +105,7 @@ button:hover, .btn-action:hover {
     width: 100px;
 }
 #navbarSupportedContent a{
-  font-size: 16px;
+  font-size: 16.7px;
 }
 #navbarSupportedContent a:hover{
   border-bottom: 2.5px solid white;
@@ -99,7 +117,7 @@ button:hover, .btn-action:hover {
 #logout
 {
 	position: relative;
-	left: 12rem;
+	left: 16rem;
 }
 
 </style>
@@ -116,9 +134,6 @@ button:hover, .btn-action:hover {
           <a class="nav-link active" href="CustomerWelcomePage.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="http://localhost:9000/CustomerProfile">Profile</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" href="http://localhost:9000/PropertiesUnderReview">Properties Under Review</a>
         </li>
         <li class="nav-item">
@@ -127,8 +142,12 @@ button:hover, .btn-action:hover {
         <li class="nav-item">
           <a class="nav-link active" href="http://localhost:9000/PurchasedProperties">Purchased Properties</a>
         </li>
-        <li class="nav-item" id="logout">
-          <a class="nav-link active" href="LogOut">Logout</a>
+         <li class="nav-item dropdown" id ="logout">
+          <img src="Images/profile.png" alt="Cinque Terre" width="50" height="50" style="position: relative; left: 2rem;">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="CustomerProfile">Profile</a>
+            <a class="dropdown-item" href="LogOut">LogOut</a>
+          </div>
         </li>
       </ul>
     </div>
@@ -158,8 +177,6 @@ button:hover, .btn-action:hover {
     } 
     %>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
  
 </body>

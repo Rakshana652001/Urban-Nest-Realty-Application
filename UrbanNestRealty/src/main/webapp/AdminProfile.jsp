@@ -75,7 +75,6 @@ button:hover, .btn-action:hover {
 	margin-right: 25px;
 }
  
- 
 .navbar-brand
 {
 	position: relative;
@@ -133,13 +132,14 @@ button:hover, .btn-action:hover {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="AdminWelcomePage.jsp">Home</a>
+          <a class="nav-link active" href="AdminWelcomePage.jsp">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" href="AdminProfile">Profile</a>
         </li>
+        
         <li class="nav-item dropdown">
-          <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Clients
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -148,7 +148,7 @@ button:hover, .btn-action:hover {
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Seller Properties
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -157,13 +157,13 @@ button:hover, .btn-action:hover {
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=ApproveToBuy>Payment Approval</a>
+          <a class="nav-link active" href=ApproveToBuy>Payment Approval</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=ClosedDeals>Closed Deals</a>
+          <a class="nav-link active" href=ClosedDeals>Closed Deals</a>
         </li>
         <li class="nav-item" id="logout">
-          <a class="nav-link"  href="LogOut">Logout</a>
+          <a class="nav-link active"  href="LogOut">Logout</a>
         </li>
       </ul>
     </div>

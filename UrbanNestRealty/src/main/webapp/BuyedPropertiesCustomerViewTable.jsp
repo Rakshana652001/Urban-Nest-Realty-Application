@@ -29,6 +29,8 @@ h3 {
     text-align: center;
     margin-bottom: 20px;
     color: white;
+    position: relative;
+    top: 8rem;
 }
 
 .table-container {
@@ -43,6 +45,8 @@ table {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 8rem;
 }
 
 th, td {
@@ -89,15 +93,15 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 .history
 {
 	position: relative;
-	left: 30rem;
-	bottom: 10px;
+	left: 35rem;
+	top: 11rem;
 }
 .navbar {
     background-color: #818589;
     width: 100%;
     margin: 0;
     padding: 0;
-    position: sticky;
+    position: fixed;
     top:0;
   	left: 0;
   	margin-bottom: 25px;
@@ -109,7 +113,25 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 	margin-right: 25px;
 }
  
- 
+ .dropdown-menu {
+    background-color: #818589;
+    border: none;
+}
+
+.dropdown-item{
+     color: white;
+     }
+
+
+.dropdown-item:hover {
+    background-color: #818589;
+    border-radius: 12px;
+}
+.dropdown:hover .dropdown-menu {
+
+   display: block;
+   margin-top: 0;
+}
 .navbar-brand
 {
 	position: relative;
@@ -123,7 +145,7 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
     width: 100px;
 }
 #navbarSupportedContent a{
-  font-size: 16px;
+  font-size: 16.7px;
 }
 #navbarSupportedContent a:hover{
   border-bottom: 2.5px solid white;
@@ -135,7 +157,7 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
 #logout
 {
 	position: relative;
-	left: 12rem;
+	left: 5rem;
 }
 </style>
 </head>
@@ -151,9 +173,6 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
           <a class="nav-link active" href="CustomerWelcomePage.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="http://localhost:9000/CustomerProfile">Profile</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" href="http://localhost:9000/PropertiesUnderReview">Properties Under Review</a>
         </li>
         <li class="nav-item">
@@ -162,14 +181,21 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
         <li class="nav-item">
           <a class="nav-link active" href="http://localhost:9000/PurchasedProperties">Purchased Properties</a>
         </li>
-        <li class="nav-item" id="logout">
-          <a class="nav-link active" href="LogOut">Logout</a>
+        <li class="nav-item">
+          <a class="nav-link active" href="http://localhost:9000/CustomerHistory">Transaction History</a>
+        </li>
+        <li class="nav-item dropdown" id ="logout">
+          <img src="Images/profile.png" alt="Cinque Terre" width="50" height="50" style="position: relative; left: 2rem;">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="CustomerProfile">Profile</a>
+            <a class="dropdown-item" href="LogOut">LogOut</a>
+          </div>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<a href="CustomerHistory"><button class="history">Transaction History</button></a>
+<h3>Purchased Properties</h3>
 <table border="1">
     <thead>
         <tr>
@@ -260,8 +286,6 @@ button:hover, .btn-action:hover, input[type="submit"]:hover {
         doc.save("receipt_" + sellerId + ".pdf");
     }
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>

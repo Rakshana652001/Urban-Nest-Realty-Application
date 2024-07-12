@@ -73,7 +73,7 @@ section {
 #logout
 {
 	position: relative;
-	left: 17rem;
+	left: 14rem;
 }
 
 </style>

@@ -10,7 +10,7 @@
 <style type="text/css">
 body {
     font-family: "Lora", serif;
-    background-color: #818589;
+    background-color: #D8CCC0;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -105,7 +105,7 @@ button:hover {
     <label>Property State: <input type="text" id="propertyState" name="propertyState" placeholder="Tamil Nadu" required/></label><br><br>
     <button type="submit">Register the Property</button>
 </form>
-<form action="SellerWelcomePage.jsp"><button>Back to Your Page</button></form>
+<form action="javascript:history.back()"><button>Back</button></form>
 </div>
 <script>
 function autoFillPropertyDetails() 

@@ -50,7 +50,7 @@ section {
 }
 
 #navbarSupportedContent a{
-  font-size: 16px;
+  font-size: 16.7px;
 }
 #navbarSupportedContent a:hover{
   border-bottom: 2.5px solid white;
@@ -72,9 +72,29 @@ section {
 #logout
 {
 	position: relative;
-	left: 10rem;
+	left: 3rem;
 }
 
+.dropdown:hover .dropdown-menu {
+
+   display: block;
+   margin-top: 0;
+}
+
+.dropdown-menu {
+    background-color: #818589;
+    border: none;
+}
+
+.dropdown-item{
+     color: white;
+     }
+
+
+.dropdown-item:hover {
+    background-color: #818589;
+    border-radius: 12px;
+}
 </style>
 </head>
 <body>
@@ -89,9 +109,6 @@ section {
           <a class="nav-link active" href="Home.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="CustomerProfile">Profile</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" href="PropertiesUnderReview">Properties Under Review</a>
         </li>
         <li class="nav-item">
@@ -100,8 +117,15 @@ section {
         <li class="nav-item">
           <a class="nav-link active" href="PurchasedProperties">Purchased Properties</a>
         </li>
-        <li class="nav-item" id="logout">
-          <a class="nav-link active" href="LogOut">Logout</a>
+         <li class="nav-item">
+          <a class="nav-link active" href="http://localhost:9000/CustomerHistory">Transaction History</a>
+        </li>
+         <li class="nav-item dropdown" id ="logout">
+          <img src="Images/profile.png" alt="Cinque Terre" width="50" height="50" style="position: relative; left: 2rem;">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="CustomerProfile">Profile</a>
+            <a class="dropdown-item" href="LogOut">LogOut</a>
+          </div>
         </li>
       </ul>
     </div>
@@ -110,8 +134,6 @@ section {
 <section id="home">
     
 </section>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
