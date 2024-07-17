@@ -84,5 +84,8 @@
      
 <span style="color:blue">**Download Receipt:**</span><br>
      After all process done for both customer and seller side paid receipt will be shown where in customer side property details with property document will be given and for seller side customer details and their government Id will be provided.
+
+<span style="color:blue">**Encryption, Decryption:**</span><br>
+     While user registration and updating the password encryption process is done and during login decryption process will be done
 <br><a href=""> Real Estate Management System  User Manual</a><br>
 <a href=""> Real Estate Management System  PPT</a>
