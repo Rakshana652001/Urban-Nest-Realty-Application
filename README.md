@@ -13,7 +13,7 @@
 <span style="color:red">**Admin**</span><br>
 <span>&#9745;</span> Admin view ,record and delete seller and customer list<br>
 <span>&#9745;</span> Provide approval for posted property<br>
-<span>&#9745;</span> Admin Provide approval to buy property<br>
+<span>&#9745;</span> Provide approval to buy property<br>
 <span>&#9745;</span> Closed deals details<br>
 <br>
 <span style="color:red">**Seller**</span><br>
