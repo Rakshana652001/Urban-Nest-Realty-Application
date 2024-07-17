@@ -73,12 +73,15 @@
 <span style="color:blue">**Post Properties :**</span><br>
        A seller can login and post a property by adding their property name, images, documents with propery address after giving all the details, seller can register thier property while
        admin can see and give the approval to the posted property after checking the property images, document and address, which will display to home page where all users can view that property.
+       
 <span style="color:blue">**Payment Process:**</span><br>
       Customer can login a see the properties, they can register the property want they want once they register to buy they want to give Government Id, and other details, while admin can view
       the details after checking admin will give approval to customer for payment process then also update the propery as registered so others cannot see that posted property. Customer can pay
       for that property by giving seller and customer account number with half amount payment, remaing will be paid after complete registration.
+      
 <span style="color:blue">**Closed Deals:**</span><br>
      Once the property registration successful then then closed deals list will be displayed for all three users, customer side property document soft copy, seller side customer's government id will be displayed for proof.
+     
 <span style="color:blue">**Download Receipt:**</span><br>
      After all process done for both customer and seller side paid receipt will be shown where in customer side property details with property document will be given and for seller side customer details and their government Id will be provided.
 <br><a href=""> Real Estate Management System  User Manual</a><br>
