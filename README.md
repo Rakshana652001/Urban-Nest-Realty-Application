@@ -73,6 +73,9 @@
 <span style="color:blue">**Post Properties :**</span><br>
        A seller can login and post a property by adding their property name, images, documents with propery address after giving all the details, seller can register thier property while
        admin can see and give the approval to the posted property after checking the property images, document and address, which will display to home page where all users can view that property.
+
+<span style="color:blue">**Encryption, Decryption:**</span><br>
+     While user registration and updating the password encryption process is done and during login decryption process will be done.
        
 <span style="color:blue">**Payment Process:**</span><br>
       Customer can login a see the properties, they can register the property want they want once they register to buy they want to give Government Id, and other details, while admin can view
@@ -85,7 +88,5 @@
 <span style="color:blue">**Download Receipt:**</span><br>
      After all process done for both customer and seller side paid receipt will be shown where in customer side property details with property document will be given and for seller side customer details and their government Id will be provided.
 
-<span style="color:blue">**Encryption, Decryption:**</span><br>
-     While user registration and updating the password encryption process is done and during login decryption process will be done
 <br><a href=""> Real Estate Management System  User Manual</a><br>
 <a href=""> Real Estate Management System  PPT</a>
