@@ -6,7 +6,7 @@
 
 <hr>
 <bold>About:</bold><br>
-  Real Estate Management System is used to sell and buy the properties buy the seller and the customer.
+  Real Estate Management System is used to sell and buy the properties by the seller and the customer.
 <hr>
 
 <span style="color:blue">**Modules:-**</span><br>
